@@ -1,3 +1,5 @@
+# O que o navegador faz?
+
 O navegador é um mecanismo de renderização. Sua função é fazer o download de uma página da Web e renderizá-la de forma compreensível para um ser humano, o usuário digita um endereço na barra do navegador e o navegador faz o download do "documento" nesse URL e o renderiza.
 
 Em resumo, o trabalho de um navegador consiste em:
