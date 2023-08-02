@@ -6,3 +6,4 @@
 - [Bancos de dados no desenvolvimento Web](db.md)
 - [Frameworks de desenvolvimento web](frameworks.md)
 - [O que é o Back-End?](backend.md)
+- [O que é o Git e por que usá-lo?](git.md)
