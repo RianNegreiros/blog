@@ -24,11 +24,11 @@ O Git facilita muito a colaboração em uma equipe e aumenta a produtividade.
 
 Suponha que você e um membro da equipe estejam trabalhando juntos em algum código HTML. Em um cenário sem o Git, você escreveria a sua parte do código, enviaria o arquivo por e-mail para ele; ele escreveria a parte dele e o enviaria de volta para você. Entretanto, enquanto eles estiverem fazendo a parte deles, você não poderá continuar trabalhando no código. Se o fizer, terá de descobrir o que exatamente o colega de equipe alterou quando o enviou de volta para você e, de alguma forma, mesclar isso no seu arquivo com o novo código. Essa busca por alterações e merge não é apenas um trabalho tedioso, mas está sujeito a erros humanos. Além disso, o tempo gasto fazendo isso pode ser gasto de forma mais produtiva na escrita de código. A boa notícia é que o Git gerencia essas alterações e as mescla para você, de modo que você e vários membros da equipe podem trabalhar em projetos simultaneamente sem precisar se preocupar com a exclusão acidental do trabalho de outra pessoa ou com a merge incorreta.
 
-## Ramificações de recursos
+## Branches(Ramificações) de recursos
 
 O Git permite que você trabalhe e envie vários recursos simultaneamente. Por exemplo, suponha que você queira atualizar a aparência da barra de navegação do seu site e adicionar um recurso que permita que os usuários comentem as suas postagens. Esses são recursos separados: a nova barra de navegação e os comentários. Agora, em uma situação sem Git, se você começar a trabalhar nos dois recursos e terminar a barra de navegação em uma semana, mas precisar de mais três semanas para ativar os comentários, não será possível ativar a barra de navegação até que o recurso de comentários também esteja concluído. Portanto, você teria que trabalhar nos recursos sequencialmente se quiser colocá-los em funcionamento à medida que forem concluídos, o que significa uma perda de produtividade.
 
-O Git, no entanto, tem a capacidade de criar ramificações separadas para cada recurso. Essas ramificações podem ser trabalhadas simultaneamente e, quando concluídas, podem ser mescladas de volta à branch principal.
+O Git, no entanto, tem a capacidade de criar branches separadas para cada recurso. Essas branches podem ser trabalhadas simultaneamente e, quando concluídas, podem ser mescladas de volta à branch principal.
 
 ## Git no mercado
 
