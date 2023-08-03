@@ -176,7 +176,7 @@ Em seguida, dê um nome ao seu repository e crie-o! Agora, abra um terminal de l
 
 ```bash
 git remote add origin https://github.com/username/repo-name
-# Define o novo remote
+# Define um novo repositório remoto
 ```
 
 E, por fim, envie as alterações em seu repository local para o GitHub da seguinte forma:
@@ -187,13 +187,13 @@ git push -u origin master
 
 ## Criação de uma branch
 
-De acordo com a [documentação do GitHub](https://docs.github.com/en/get-started/quickstart/github-glossary#branch), um "branch é uma versão paralela de um repository. Ele está contido no repository, mas não afeta o branch principal ou mestre, permitindo que você trabalhe livremente sem interromper a versão "ativa". Quando tiver feito as alterações desejadas, você poderá mesclar a branch de volta à branch principal para publicar as alterações. Para obter mais informações, consulte 'Sobre ramificações'." Os branches são usados principalmente para criar novos recursos e podem ser mesclados de volta ao branch mestre (o branch principal) depois de fazer uma pull request.
+Conforme a [documentação do GitHub](https://docs.github.com/en/get-started/quickstart/github-glossary#branch), um "branch é uma versão paralela de um repository. Ele está contido no repository, mas não afeta o branch principal ou mestre, permitindo que você trabalhe livremente sem interromper a versão "ativa". Quando tiver feito as alterações desejadas, você poderá mesclar a branch de volta à branch principal para publicar as alterações. Para obter mais informações, consulte 'Sobre ramificações'." Os branches são usados principalmente para criar novos recursos e podem ser mesclados de volta ao branch mestre (o branch principal) após um pull request.
 
 ## Abrindo uma pull request
 
 Uma pull request é uma alteração proposta ao repository enviada por um usuário e que deve ser revisada e aceita ou rejeitada pelos colaboradores do repository. As pull requests têm seu próprio fórum de discussão.
 
-## Merging alterações
+## Merging(mesclando) alterações
 
 Depois que uma pull request é aprovada, ela pode ser mesclada com o mestre, a branch ou outras ramificações.
 
