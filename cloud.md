@@ -88,9 +88,9 @@ Com o conhecimento dessas características da computação em nuvem, podemos tom
 As plataformas de nuvem evoluíram para atender às diversas necessidades de indivíduos, empresas e governos. Os fornecedores de nuvem oferecem diferentes tipos de nuvem para atender a uma base de clientes mais ampla. Essa abordagem permite que os fornecedores de nuvem atendam aos clientes onde quer que eles estejam, em vez de empurrá-los para um único modelo.
 
 <figure align="center">
-    <img src="./assets/types-of-cloud.png" alt="The cloud delivery models">
+    <img src="./assets/types-of-cloud.png" alt="Os modelos de fornecimento de nuvem">
     <figcaption>
-      <code>The cloud delivery models</code>
+      <code>Os modelos de fornecimento de nuvem</code>
     </figcaption>
 </figure>
 
