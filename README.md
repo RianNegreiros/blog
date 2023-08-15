@@ -7,3 +7,4 @@
 - [Frameworks de desenvolvimento web](frameworks.md)
 - [O que é o Back-End?](backend.md)
 - [O que é o Git e por que usá-lo?](git.md)
+- [DESENVOLVIMENTO ÁGIL DE SOFTWARE](agile.md)
