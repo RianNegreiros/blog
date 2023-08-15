@@ -129,3 +129,11 @@ Alguns exemplos incluem:
 Um site pode coletar muitos dados sobre os usuários: o que eles pesquisam, o que compram, o que recomendam, quanto tempo permanecem em cada página. A programação no lado do servidor pode ser usada para refinar as respostas com base em uma análise desses dados.
 
 Por exemplo, a Amazon e o Google anunciam produtos com base em pesquisas (e compras) anteriores.
+
+### Alguns recursos gratuitos para aprender desenvolvimento Back-End:
+
+- [Rest API Básico](https://oliveira-michel.github.io/artigos/2020/02/10/rest-api-basico---guia-visual.htm)
+
+- [Curso Back End Development and APIs](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
+
+- [Back-end Roadmap](https://roadmap.sh/backend)
