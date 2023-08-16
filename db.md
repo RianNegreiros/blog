@@ -15,12 +15,10 @@ Os **sites estáticos** são aqueles que exibem apenas informações, como texto
 
 Os **sites dinâmicos**, por outro lado, permitem a interação do usuário, e é aí que os bancos de dados entram em cena. Pense em qualquer site que você tenha visitado hoje. Quantos deles exigiram que você fizesse login ou permitiram que você clicasse em um botão que recuperasse algumas informações, talvez até uma nova página da Web, para você? Essas informações que os aplicações Web podem exibir ou processar para permitir o acesso a outras informações precisam ser armazenadas em algum lugar. Esse local é um banco de dados associado ao aplicação Web.
 
-<figure align="center">
-    <img src="./assets/basic-structure-of-a-dynamic-website.png" alt="Estrutura básica de um site dinâmico">
+![Estrutura básica de um site dinâmico](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7bzhq3bwxt8pcebnv1f6.png)
     <figcaption>
-      <code>Estrutura básica de um site dinâmico</code>
+      Estrutura básica de um site dinâmico
     </figcaption>
-</figure>
 
 ## DBMS em aplicações Web
 
@@ -89,12 +87,11 @@ O [MariaDB](https://mariadb.org/) é um fork do MySQL, que foi criada pelos dese
 
 Além de ter todos os benefícios que o MySQL apresenta, o MariaDB também oferece muitas operações e comandos que não estão disponíveis no MySQL e substitui recursos que tendem a afetar negativamente o desempenho.
 
-<figure align="center">
-    <img src="./assets/common-sql-databases.jpeg" alt="Database SQL mais comuns" />
+
+![Database SQL mais comuns](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zwxi1zeqbkggch9gm35f.jpeg)
     <figcaption>
-      <code>Database SQL mais comuns</code>
+      Database SQL mais comuns
     </figcaption>
-</figure>
 
 ### A transição para o NoSQL
 
@@ -130,12 +127,11 @@ O [CouchDB](http://couchdb.apache.org/) é um sistema de gerenciamento de banco 
 
 O [Redis](https://redis.io/) é um armazenamento de estrutura de dados na memória de código aberto que é frequentemente usado como um banco de dados. Ele oferece suporte a todos os tipos de estruturas de dados, desde strings, hashes, listas e conjuntos até conjuntos ordenados com consultas de intervalo, bitmaps, hiperloglogs e índices geoespaciais com consultas de raio e fluxos. Isso significa que o Redis fornece uma ampla variedade de estruturas de dados que podem ser usadas para armazenar os dados de seu aplicação da maneira mais ideal, de acordo com a forma como os dados são estruturados. Além disso, como o Redis armazena dados na memória, ele permite a recuperação rápida de dados e, portanto, acelera significativamente o processo de resposta às solicitações dos usuários.
 
-<figure align="center">
-    <img src="./assets/common-nosql-databases.png" alt="Database NoSQL mais comuns" />
+
+![Database NoSQL mais comuns](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jv3tf4y6z5lehpb5wev4.png)
     <figcaption>
-      <code>Database NoSQL mais comuns</code>
+      Database NoSQL mais comuns
     </figcaption>
-</figure>
 
 
 ## Cache na Web
@@ -150,12 +146,11 @@ O armazenamento em cache na Web é um recurso de design do protocolo HTTP que vi
 
 Essencialmente, o cache da Web funciona armazenando em cache as respostas HTTP para determinadas solicitações de acordo com uma análise probabilística das solicitações, frequentemente observadas no servidor. As solicitações subsequentes de conteúdo armazenado em cache podem ser atendidas a partir de um cache mais próximo do usuário, em vez de ter que enviar a solicitação de volta ao servidor da Web, que então faz uma chamada ao banco de dados para obter os dados necessários.
 
-<figure align="center">
-    <img src="./assets/how-cache-works.png" alt="Como o cache funciona" />
+
+![Como o cache funciona](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1kqq7et5zs4xyc8xub7f.png)
     <figcaption>
-      <code>Como o cache funciona</code>
+      Como o cache funciona
     </figcaption>
-</figure>
 
 ### Benefícios do armazenamento em cache
 
@@ -188,3 +183,11 @@ O CouchDB, assim como os outros dois bancos de dados NoSQL que discutimos, tem c
 O [Memcached](https://memcached.org) é um sistema de cache de objetos de memória distribuída, de código aberto e alto desempenho, destinado a acelerar aplicações dinâmicas, aliviando a carga do banco de dados. O Memcached armazena pares de valores-chave de dados de chamadas ao banco de dados na memória para acelerar o processo de pesquisa no banco de dados. A ideia subjacente do Memcached é que ele permite retirar memória de partes do sistema onde há mais do que o necessário e torná-la acessível a áreas onde há menos do que o necessário. O Memcached é, portanto, uma ferramenta muito útil.
 
 Isso conclui a discussão sobre bancos de dados e como seu uso pode se tornar mais eficiente por meio do armazenamento em cache.
+
+### Alguns conteúdos e cursos para se aprofundar em databases
+
+- [Categoria Database Systems do GitHub repository Computer Science courses with video lectures](https://github.com/Developer-Y/cs-video-courses#database-systems)
+
+- [CS403: Introduction to Modern Database Systems da Saylor acadamy](https://learn.saylor.org/course/view.php?id=93)
+
+- [Stanford University: Databases: Relational Databases and SQL](https://www.edx.org/learn/relational-databases/stanford-university-databases-relational-databases-and-sql)
