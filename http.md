@@ -92,8 +92,6 @@ Os proprietários de sites relutavam em mudar para o HTTPS, pois isso envolvia v
 
 O objetivo do HTTPS (HTTP Secure) é permitir que clientes e servidores conversem com segurança por meio do TLS (Transport Layer Security), o sucessor do SSL (Secure Socket Layer).
 
-O problema que o TLS resolve é bastante simples e pode ser ilustrado com uma metáfora simples: sua cara-metade liga para você no meio do dia, enquanto você está em uma reunião, e pede que você informe a senha da sua conta bancária on-line, pois ela precisa transferir dinheiro para a mensalidade do seu filho. É fundamental que você comunique isso agora mesmo, caso contrário, você enfrentará a possibilidade de seu filho ser rejeitado na escola na manhã seguinte.
-
 Agora você se depara com dois desafios:
 
 - **Autenticação**: garantir que você está realmente falando com a pessoa amada e não com alguém que finge ser ela.
