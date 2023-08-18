@@ -8,3 +8,4 @@
 - [O que é o Back-End?](backend.md)
 - [O que é o Git e por que usá-lo?](git.md)
 - [DESENVOLVIMENTO ÁGIL DE SOFTWARE](agile.md)
+- [Criação de URLs amigáveis (slugs) a partir de strings no ASP.NET Core](slug.md)
