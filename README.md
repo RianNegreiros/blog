@@ -1,3 +1,5 @@
+[![pages-build-deployment](https://github.com/RianNegreiros/posts-md/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/RianNegreiros/posts-md/actions/workflows/pages/pages-build-deployment)
+
 # Blog posts
 
 - [O que o navegador faz?](browser.md)
