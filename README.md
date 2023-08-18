@@ -1,4 +1,4 @@
-# Meus blog posts
+# Blog posts
 
 - [O que o navegador faz?](browser.md)
 - [Como funciona o HTTP?](http.md)
