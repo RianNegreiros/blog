@@ -1,6 +1,6 @@
 # O que é o Git e por que usá-lo?
 
-Discutiremos os conceitos básicos do controle de versão com o git!
+O Git revolucionou a forma como os desenvolvedores gerenciam seus projetos e colaboram em equipe. Neste artigo, vamos explorar os conceitos básicos do Git e entender por que ele se tornou uma ferramenta essencial para o desenvolvimento de software.
 
 ## O que é controle de versão?
 
@@ -8,29 +8,31 @@ Gerenciar os arquivos do seu projeto. Por exemplo, ao criar um site, você terá
 
 ## O que é o Git?
 
-O Git é o sistema de controle de versão mais popular do mundo.
+O Git é um sistema de controle de versão distribuído amplamente utilizado em todo o mundo. Ele permite que os desenvolvedores acompanhem as mudanças em seus projetos ao longo do tempo, mantendo um histórico completo de todas as modificações feitas. O Git não apenas rastreia as alterações, mas também facilita a colaboração eficaz entre membros de uma equipe e o gerenciamento de diferentes recursos de maneira simultânea.
 
-## Por que o Git?
+## Benefícios do uso do Git
+
+### Por que o Git?
 
 O Git mantém um histórico completo das alterações feitas em qualquer projeto, torna a colaboração mais simples e mais produtiva e permite trabalhar em vários recursos ao mesmo tempo.
 
-## Histórico
+### Histórico completo
 
 O Git mantém o registro de todas as alterações que fazemos em nosso projeto. Suponha que você altere parte do CSS e o layout fique ótimo, mas, alguns meses depois, essa alteração faz com que o layout seja interrompido em algumas páginas. Em vez de ter que lembrar o que foi alterado há alguns meses, o Git teria um registro de exatamente quais linhas foram removidas/adicionadas/modificadas, o que facilita muito a correção do problema. Além disso, você pode reverter as alterações com o Git. Nada se perde ou é definitivo.
 
-## Colaboração
+### Colaboração simplificada
 
 O Git facilita muito a colaboração em uma equipe e aumenta a produtividade.
 
 Suponha que você e um membro da equipe estejam trabalhando juntos em algum código HTML. Em um cenário sem o Git, você escreveria a sua parte do código, enviaria o arquivo por e-mail para ele; ele escreveria a parte dele e o enviaria de volta para você. Entretanto, enquanto eles estiverem fazendo a parte deles, você não poderá continuar trabalhando no código. Se o fizer, terá de descobrir o que exatamente o colega de equipe alterou quando o enviou de volta para você e, de alguma forma, mesclar isso no seu arquivo com o novo código. Essa busca por alterações e merge não é apenas um trabalho tedioso, mas está sujeito a erros humanos. Além disso, o tempo gasto fazendo isso pode ser gasto de forma mais produtiva na escrita de código. A boa notícia é que o Git gerencia essas alterações e as mescla para você, de modo que você e vários membros da equipe podem trabalhar em projetos simultaneamente sem precisar se preocupar com a exclusão acidental do trabalho de outra pessoa ou com a merge incorreta.
 
-## Branches(Ramificações) de recursos
+### Branches para recursos
 
 O Git permite que você trabalhe e envie vários recursos simultaneamente. Por exemplo, suponha que você queira atualizar a aparência da barra de navegação do seu site e adicionar um recurso que permita que os usuários comentem as suas postagens. Esses são recursos separados: a nova barra de navegação e os comentários. Agora, em uma situação sem Git, se você começar a trabalhar nos dois recursos e terminar a barra de navegação em uma semana, mas precisar de mais três semanas para ativar os comentários, não será possível ativar a barra de navegação até que o recurso de comentários também esteja concluído. Portanto, você teria que trabalhar nos recursos sequencialmente se quiser colocá-los em funcionamento à medida que forem concluídos, o que significa uma perda de produtividade.
 
 O Git, no entanto, tem a capacidade de criar branches separadas para cada recurso. Essas branches podem ser trabalhadas simultaneamente e, quando concluídas, podem ser mescladas de volta à branch principal.
 
-## Git no mercado
+## Git no mercado de trabalho
 
 O Git é o padrão do mercado, e a maioria dos empregadores presume que você seja bem versado em Git se estiver se candidatando a um emprego na área de software. Além disso, ele pode tornar seu tempo mais produtivo e menos propenso à perda de dados, mesmo que você esteja trabalhando sozinho.
 
@@ -38,19 +40,19 @@ O Git é o padrão do mercado, e a maioria dos empregadores presume que você se
 
 O Git usa um vocabulário muito específico, e a familiaridade com ele facilitará a comunicação com os membros da sua equipe e com a comunidade on-line. Aqui estão alguns termos comuns,
 
-## Repository
+### Repository
 
 Para simplificar, um projeto é um repository. Os repositórios ou "repos" do Git contêm todo o código e o histórico de versões de um determinado projeto.
 
-## Working directory
+### Working directory
 
 O Working directory é a pasta em seu computador local onde o projeto existe. O Git rastreia todas as alterações feitas nessa pasta.
 
-## Commit
+### Commit
 
 O Git não salva ou armazena nenhuma alteração feita nos arquivos dentro do diretório de trabalho até que você faça o "commit". Os commits salvam as alterações que você fez no próprio Git.
 
-## Staging
+### Staging
 
 Suponha que você tenha feito alterações em 8 arquivos no diretório de trabalho, mas queira confirmar apenas 4 deles porque os outros 4 apresentam erros ou ainda não estão completos. Como você confirma apenas 4? Bem, você os coloca na "área de staging" e depois faz o commit. A staging de um arquivo significa que você o marcou para um commit.
 
@@ -84,7 +86,7 @@ git status
 
 Além disso, observe que cada um de nossos playgrounds de codificação é como uma máquina virtual individual, que é criada e destruída durante a execução, e é por isso que temos que inicializar um repo todas as vezes! Esse também é o motivo pelo qual já existem tantos arquivos "aleatórios". Além disso, para tornar a saída do console menos confusa, passe o sinalizador quiet como `-q`.
 
-## Adição de novos arquivos à área de preparação
+### Adição de novos arquivos à área de staging(preparação)
 
 Adicione novos arquivos à área de preparação com:
 
@@ -101,7 +103,7 @@ git add .
 git status
 ```
 
-## "Commitando" arquivos
+### "Commitando" arquivos
 
 Commit os arquivos com:
 
@@ -116,7 +118,7 @@ git add .
 git commit -m "Primeiro commit"
 ```
 
-## Verificando histórico de commits
+### Verificando histórico de commits
 
 Para imprimir o histórico de commits do Git, digite:
 
@@ -144,7 +146,7 @@ git commit -m "Primeiro commit" -q
 git log
 ```
 
-## Reverter para um commit anterior
+### Reverter para um commit anterior
 
 Para reverter seu diretório de trabalho para qualquer commit anterior, digite o comando:
 
@@ -168,9 +170,9 @@ Criar um repository do GitHub a partir de um repository do Git existente
 Primeiro, registre-se no [GitHub](https://github.com/signup). Crie uma conta gratuita e faça login. Em seguida, crie um novo repository clicando no símbolo + e em "new repository" (novo repository) no canto superior direito, conforme mostrado abaixo.
 
 
-<figure align="center">
+<div align="center">
     <img src="./assets/new-repository.png" alt="Novo repositório" />
-</figure>
+</div>
 
 Em seguida, dê um nome ao seu repository e crie-o! Agora, abra um terminal de linha de comando e mude os diretórios para um repository Git existente. Em seguida, na parte superior da página Quick Setup do seu repository do GitHub, clique para copiar a URL do repository remoto. Ela será parecida com <https://github.com/username/repo-name>. Em seguida, adicione a URL do repository remoto da seguinte forma:
 
@@ -185,23 +187,43 @@ E, por fim, envie as alterações em seu repository local para o GitHub da segui
 git push -u origin master
 ```
 
-## Criação de uma branch
+### Criação de uma branch
 
 Conforme a [documentação do GitHub](https://docs.github.com/en/get-started/quickstart/github-glossary#branch), um "branch é uma versão paralela de um repository. Ele está contido no repository, mas não afeta o branch principal ou mestre, permitindo que você trabalhe livremente sem interromper a versão "ativa". Quando tiver feito as alterações desejadas, você poderá mesclar a branch de volta à branch principal para publicar as alterações. Para obter mais informações, consulte 'Sobre ramificações'." Os branches são usados principalmente para criar novos recursos e podem ser mesclados de volta ao branch mestre (o branch principal) após um pull request.
 
-## Abrindo uma pull request
+### Abrindo uma pull request
 
 Uma pull request é uma alteração proposta ao repository enviada por um usuário e que deve ser revisada e aceita ou rejeitada pelos colaboradores do repository. As pull requests têm seu próprio fórum de discussão.
 
-## Merging(mesclando) alterações
+### Merging(mesclando) alterações
 
 Depois que uma pull request é aprovada, ela pode ser mesclada com o mestre, a branch ou outras ramificações.
 
 Dê uma olhada no diagrama abaixo para ter uma visão mais clara!
 
-<figure align="center">
+<div align="center">
     <img src="./assets/github-flow.png" alt="GitHub flow" />
-    <figcaption>
+    <p align="center">
       <code>GitHub flow</code>
-    </figcaption>
-</figure>
+    </p>
+</div>
+
+## Resumo
+
+Neste artigo, exploramos os fundamentos do Git e sua importância no desenvolvimento de software. O Git, como um sistema de controle de versão distribuído, oferece uma série de benefícios essenciais para os desenvolvedores.
+
+- **Histórico Completo**: O Git mantém um histórico detalhado de todas as alterações feitas em um projeto, permitindo a fácil identificação de modificações anteriores e simplificando a correção de problemas.
+
+- **Colaboração Eficiente**: A colaboração em equipe é aprimorada pelo Git, que facilita a gestão de várias contribuições simultâneas, elimina conflitos de mesclagem e mantém o trabalho de cada membro organizado.
+
+**Branches para Recursos**: As ramificações permitem que você trabalhe em novos recursos independentemente, garantindo que o código principal não seja afetado. Essas ramificações podem ser integradas de volta ao projeto principal quando estiverem concluídas.
+
+Além disso, discutimos brevemente o GitHub como uma plataforma de hospedagem de repositório que complementa o Git, tornando-o uma ferramenta ainda mais poderosa para o desenvolvimento colaborativo.
+
+Dominar o Git é essencial para qualquer desenvolvedor, não apenas para a eficiência individual, mas também para se destacar no mercado de trabalho.
+
+## Alguns recursos para aprender Git
+
+- [Git Book](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-O-B%C3%A1sico-do-Git)
+- [GitHub Skills](https://skills.github.com/)
+- [Aula do MIT sobre controle de versionamento](https://missing.csail.mit.edu/2020/version-control/)
