@@ -2,7 +2,7 @@
 
 # Blog posts
 
-- [O que o navegador faz?](browser.md)
+- [O que é um Navegador e Como Funciona?](browser.md)
 - [Como funciona o HTTP?](http.md)
 - [O que é a Web?](web.md)
 - [Bancos de dados no desenvolvimento Web](db.md)
