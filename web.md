@@ -90,4 +90,7 @@ O `ifconfig` é o comando que funciona no Linux. O comando `ipconfig` faz o mesm
 
 Isso significa que, quando o site estiver ativo em um servidor, os usuários poderão se conectar a ele por meio do endereço IP do servidor e receber dados. Você deve estar se perguntando agora onde entra o endereço IP se você acessa sites por meio de URLs. Bem, é aí que entra o DNS. Os roteadores da Web não armazenam URLs de todos os sites hospedados na Internet; eles só conhecem os endereços IP e encaminham os pacotes para seus destinos com base neles. Os usuários, no entanto, só conhecem as URLs, ou nomes de domínio, dos sites que estão visitando. Para preencher essa lacuna de informações, a Internet faz uso de **servidores DNS**, que servem como intermediários de tradução entre os sistemas finais e os roteadores, que servem para encaminhar os pacotes de dados provenientes deles para seus destinos. O processo de fazer uma pesquisa de um nome de domínio em um servidor DNS e obter o endereço IP correspondente é chamado de **resolução de DNS**.
 
-Para saber mais detalhadamente como a Web funciona recomendo o curso gratuito [Computer Networking: A Top-Down Approch](https://gaia.cs.umass.edu/kurose_ross/index.php)
+Para saber mais como a Web funciona recomendo:
+
+- [Como a Web funciona da Mozilla docs](https://developer.mozilla.org/pt-BR/docs/Learn/Getting_started_with_the_web/How_the_Web_works)
+- [Computer Networking: A Top-Down Approch](https://gaia.cs.umass.edu/kurose_ross/index.php)
