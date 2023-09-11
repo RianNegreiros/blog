@@ -12,3 +12,4 @@
 - [HTTP Cookies e como protegê-los](cookies.md)
 - [Introdução à autenticação na Web](webauth.md)
 - [Introdução à C#](csharpintro.md)
+- [O que é uma API RESTful e como projetar uma?](restfulapi.md)
