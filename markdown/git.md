@@ -171,7 +171,7 @@ Primeiro, registre-se no [GitHub](https://github.com/signup). Crie uma conta gra
 
 
 <div align="center">
-    <img src="./assets/new-repository.png" alt="Novo repositório" />
+    <img src="../assets/new-repository.png" alt="Novo repositório" />
 </div>
 
 Em seguida, dê um nome ao seu repository e crie-o! Agora, abra um terminal de linha de comando e mude os diretórios para um repository Git existente. Em seguida, na parte superior da página Quick Setup do seu repository do GitHub, clique para copiar a URL do repository remoto. Ela será parecida com <https://github.com/username/repo-name>. Em seguida, adicione a URL do repository remoto da seguinte forma:
@@ -202,7 +202,7 @@ Depois que uma pull request é aprovada, ela pode ser mesclada com o mestre, a b
 Dê uma olhada no diagrama abaixo para ter uma visão mais clara!
 
 <div align="center">
-    <img src="./assets/github-flow.png" alt="GitHub flow" />
+    <img src="../assets/github-flow.png" alt="GitHub flow" />
     <p align="center">
       <code>GitHub flow</code>
     </p>

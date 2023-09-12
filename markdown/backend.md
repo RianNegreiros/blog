@@ -13,7 +13,7 @@ Tecnicamente, você pode abrir a porta 80 em seu PC e hospedar seu site lá. No 
 As empresas de hospedagem na Web oferecem espaço em um servidor próprio ou alugado para uso dos clientes, além de fornecer conectividade com a Internet, geralmente em um data center. Normalmente, elas cobram uma taxa mensal por esse serviço. Um data center é um edifício que abriga vários servidores. Os data centers geralmente exigem refrigeração e manutenção extensivas para manter a temperatura de suas máquinas baixa, o que reduz as taxas de falhas e, portanto, aumenta os lucros. O Facebook, por exemplo, tem alguns dos maiores data centers do mundo!
 
 <figure align="center">
-    <img src="./assets/data-center.jpeg" alt="Servidores de rack em um data center" />
+    <img src="../assets/data-center.jpeg" alt="Servidores de rack em um data center" />
     <figcaption>
       <code>Servidores de rack em um data center</code>
     </figcaption>
@@ -60,7 +60,7 @@ Aqui estão algumas outras que você talvez queira considerar,
 No entanto, a maioria dos sites modernos não se baseia nesse estilo de hospedagem na Web, ou seja, o código de todas as funcionalidades do site inteiro não existe em um único servidor. Em vez disso, os sites são hospedados em máquinas virtuais (pense nelas como computadores dentro de computadores). As máquinas virtuais podem nos permitir ter várias "máquinas" em um servidor, cada uma com sistemas operacionais diferentes. Portanto, o site é hospedado em um servidor, e esse servidor delega tarefas a outros servidores.
 
 <figure align="center">
-    <img src="./assets/conventional-client-server-connection.png" alt="Convencional" />
+    <img src="../assets/conventional-client-server-connection.png" alt="Convencional" />
     <figcaption>
       <code>Convencional</code>
     </figcaption>
@@ -69,7 +69,7 @@ No entanto, a maioria dos sites modernos não se baseia nesse estilo de hospedag
 Na imagem acima, um cliente se conecta a um servidor, que cuida de tudo e responde.
 
 <figure align="center">
-    <img src="./assets/microservice-client-connection.png" alt="Arquitetura de microsserviços" />
+    <img src="../assets/microservice-client-connection.png" alt="Arquitetura de microsserviços" />
     <figcaption>
       <code>Arquitetura de microsserviços</code>
     </figcaption>
