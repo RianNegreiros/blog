@@ -176,7 +176,7 @@ posts:
  ... todos os posts em formato yaml
 ```
 
-## ****Swagger****
+## Swagger
 
 O [Swagger](https://swagger.io/) é algo que facilita os testes rápidos e a validação dos pontos de extremidade da API. Se você estiver criando uma API que será consumida por uma grande variedade de usuários, o fornecimento de uma página que permita que eles interajam instantaneamente com a API oferece um valor enorme para algo que exige um esforço incrivelmente mínimo para ser configurado.
 
