@@ -38,10 +38,10 @@ Adicione a GitHub Action abaixo:
 name: Build and Push to Azure Container Registry
  
 on:
-  workflow_dispatch:
  push:
   branches:
    - main
+ workflow_dispatch:
  
 jobs:
   docker_build_push_acr:
@@ -73,7 +73,7 @@ jobs:
         file: Dockerfile
 ```
 
-**Atenção** para mudar o valor de `tags` e `enviroment` como desejar, e quando a pipeline irá rodar configurando o `workflow_dispatch`, neste arquivo está configurado para rodar no comando push ****na branch main.
+**Atenção** para mudar o valor de `tags` como quiser.
 
 Se a Action for bem-sucedido, o resultado será como abaixo:
 
