@@ -56,7 +56,7 @@ jobs:
   
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
   
     - name: 'Docker Login'
       uses: azure/docker-login@v1
@@ -66,7 +66,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
  
     - name: Build the frontend image and push it to ACR
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v5
       with:
         push: true
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/dockerimagename:${{ github.sha }}
