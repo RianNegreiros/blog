@@ -1,6 +1,6 @@
-# Subir imagem Docker para Azure Container Registry usando o GitHub Actions
+# Armazenando imagens Docker para Azure Container Registry usando o GitHub Actions
 
-Como você pode subir imagens Docker para o Azure Container Registry (ACR) usando GitHub Actions.
+Como você pode armazena imagens Docker para o Azure Container Registry (ACR) usando GitHub Actions.
 
 Caso ainda não tenha um Azure Container Registry, você pode criá-lo usando o [portal do Azure](https://learn.microsoft.com/pt-br/azure/container-registry/container-registry-get-started-portal?tabs=azure-cli) ou usando a [CLI do Azure](https://learn.microsoft.com/pt-br/azure/container-registry/container-registry-get-started-azure-cli).
 
