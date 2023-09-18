@@ -15,4 +15,4 @@
 - [O que é uma API RESTful e como projetar uma?](./markdown/restfulapi.md)
 - [Onion Architecture](./markdown/onionarch.md)
 - [Subir imagem Docker para Azure Container Registry usando o GitHub Actions](./markdown/build-push-acr.md)
-- [Web Servers e Networking em Go](https://github.com/RianNegreiros/go-networking-web-apps/blob/main/README.md)
+- [Web Servers e Networking em Go](./markdown/go-networking-web-apps.md)
