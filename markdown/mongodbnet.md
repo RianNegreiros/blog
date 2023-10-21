@@ -12,7 +12,7 @@ Em vez de linhas, o MongoDB tem [documentos](https://www.mongodb.com/docs/v2.4/c
 
 Na essência, os documentos são arquivos BSON, que são a serialização codificada em binário dos arquivos JSON. No entanto, do ponto de vista do programador, o MongoDB manipula arquivos JSON puros.
 
-Examplo da documentção do MongoDB:
+Exemplo da documentação do MongoDB:
 
 ```json
 {
@@ -27,7 +27,7 @@ Examplo da documentção do MongoDB:
 
 Como você pode ver:
 
-há um campo `_id` no início desse documento JSON.
+Há um campo `_id` no início desse documento JSON.
 Esse campo é exclusivo e é gerado pelo MongoDB para cada documento no banco de dados.
 
 Dessa forma, o MongoDB mantém uma das propriedades importantes dos bancos de dados relacionais - consistência forte.
@@ -46,7 +46,7 @@ Como é isso?
 
 Digamos que o documento anterior esteja armazenado na coleção chamada `pessoas`; poderíamos adicionar outro documento a essa coleção, que conteria campos que o documento anterior não tinha, ou poderíamos adicionar um documento que talvez não tivesse os campos que o documento anterior tinha.
 
-Usando o examplo anterior, poderíamos adicionar o próximo documento à coleção:
+Usando o exemplo anterior, poderíamos adicionar o próximo documento à coleção:
 
 ```json
 {
