@@ -16,3 +16,4 @@
 - [Onion Architecture](./markdown/onionarch.md)
 - [Como subir imagem Docker para Azure Container Registry usando o GitHub Actions](./markdown/build-push-acr.md)
 - [Web Servers e Networking em Go](./markdown/go-networking-web-apps.md)
+- [Plataformas de Desenvolvimento em Nuvem: Facilitando a Vida dos Desenvolvedores](./markdown/plataformas-de-desenvolvimento-em-nuvem.md)
