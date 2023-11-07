@@ -18,3 +18,4 @@
 - [Web Servers e Networking em Go](./markdown/go-networking-web-apps.md)
 - [Plataformas de Desenvolvimento em Nuvem: Facilitando a Vida dos Desenvolvedores](./markdown/plataformas-de-desenvolvimento-em-nuvem.md)
 - [Critérios para Escolha de um Provedor de Serviços em Nuvem](./markdown/provedores-de-nuvem.md)
+- [Fundamentos da Computação em Nuvem](./markdown/fundamentos-da-nuvem.md)
