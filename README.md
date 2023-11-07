@@ -20,3 +20,4 @@
 - [Critérios para Escolha de um Provedor de Serviços em Nuvem](./markdown/provedores-de-nuvem.md)
 - [Fundamentos da Computação em Nuvem](./markdown/fundamentos-da-nuvem.md)
 - [Conceitos Importantes da Computação em Nuvem](./markdown/conceitos-importantes-da-computação-em-nuvem.md)
+- [HackerRank: Compare The Triplets em Go](./markdown/compare-the-triplets-em-go.md)
