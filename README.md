@@ -22,3 +22,4 @@
 - [Conceitos Importantes da Computação em Nuvem](./markdown/conceitos-importantes-da-computação-em-nuvem.md)
 - [Compare The Triplets em Go](./markdown/compare-the-triplets-em-go.md)
 - [Programação Backend: Fundamentos da Linguagem JavaScript](./markdown/programaçao-backend-fundamentos-da-linguagem-javascript.md)
+- [Reverse a List of Strings on C# without Reverse()](./markdown/reverse-a-list-of-strings-on-csharp-without-reverse-function.md)
