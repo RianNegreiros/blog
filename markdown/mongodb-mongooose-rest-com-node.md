@@ -10,7 +10,9 @@ O MongoDB, desenvolvido para integrar características de bancos de dados relaci
 
 ### Instalação e Configuração do MongoDB na Nuvem
 
-Destacando o MongoDB Atlas, exploraremos os passos para configurar um banco de dados na nuvem. Acesse [https://www.mongodb.com/atlas/database](https://www.mongodb.com/atlas/database), clique em "Try Free" e preencha os dados solicitados ou utilize sua conta do Google para o cadastro. Em seguida, escolha as opções adequadas às suas necessidades, como mostrado na Figura 1.
+Destacando o MongoDB Atlas, exploraremos os passos para configurar um banco de dados na nuvem. Acesse [https://www.mongodb.com/atlas/database](https://www.mongodb.com/atlas/database), clique em "Try Free" e preencha os dados solicitados ou utilize sua conta do Google para o cadastro. Em seguida, escolha as opções adequadas às suas necessidades, como mostrado na Figura.
+
+![MongoDB Atlas Opções](../assets/screenshot-de-mongo-atlas-opçoes.png)
 
 Na etapa seguinte, selecione a opção "Shared" para implantação gratuita. Após criar um cluster, certifique-se de escolher a opção "M0 Sandbox" para o nível gratuito. Este processo pode levar de 3 a 5 minutos. Após a conclusão, acesse "Database Access", adicione um novo usuário e configure o acesso externo pelo menu "Network Access". Obtendo a string de conexão, você está pronto para integrar o MongoDB à sua aplicação Node.js.
 
