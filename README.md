@@ -25,3 +25,4 @@
 - [Reverse a List of Strings on C# without Reverse()](./markdown/reverse-a-list-of-strings-on-csharp-without-reverse-function.md)
 - [Fundamentos Básicos de Back-end com Node.js e Express.js](./markdown/fundamentos-basicos-back-end-node-express.md)
 - [MongoDB, Mongoose e REST com Node.js](./markdown/mongodb-mongooose-rest-com-node.md)
+- [Explorando os Princípios Fundamentais da Computação](./markdown/explorando-principios-fundamentais-da-computacao.md)
