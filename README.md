@@ -27,3 +27,4 @@
 - [MongoDB, Mongoose e REST com Node.js](./markdown/mongodb-mongooose-rest-com-node.md)
 - [Explorando os Princípios Fundamentais da Computação](./markdown/explorando-principios-fundamentais-da-computacao.md)
 - [Como a Injeção de Dependência Facilita Testes Unitários em .NET](./markdown/como-di-facilita-testes-unitarios-em-dotnet.md)
+- [Coleta de Lixo(Garbage Collector) em .Net](./markdown/gc-em-dotnet.md)
