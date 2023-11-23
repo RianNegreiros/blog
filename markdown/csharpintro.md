@@ -1,4 +1,4 @@
-# Introdução a C#
+# Introdução a C #
 
 # O que é o C#?
 
@@ -12,7 +12,7 @@ Embora o C# seja derivado da [linguagem de programação C](https://pt.wikipedia
 
 Os recursos mencionados acima, combinados com suas poderosas ferramentas de desenvolvimento, suporte multiplataforma e genéricos, fazem do C# uma boa opção para muitos tipos de projetos de desenvolvimento de software, como
 
-## Usos do C#
+## Usos do C #
 
 - Projetos de [desenvolvimento rápido de aplicações](https://pt.wikipedia.org/wiki/Desenvolvimento_r%C3%A1pido_de_aplica%C3%A7%C3%B5es)
 - Aplicações de Internet com [ASP.NET Core](https://learn.microsoft.com/pt-br/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
@@ -30,10 +30,7 @@ Agora vamos nos aprofundar nos conceitos básicos do C# e aprender a escrever um
 
 Há elementos básicos que todos os programas executáveis em C# têm, e é isso que nos ver agora, começando com um programa simples em C#.
 
-<aside>
 💡 **Aviso**: O C# é [case-sensitive](https://pt.wikipedia.org/wiki/Case-sensitive)
-
-</aside>
 
 Abaixo está uma aplicação C# muito simples.
 
@@ -68,10 +65,7 @@ O programa tem **quatro** elementos principais:
 - o método `Main`
 - uma declaração de programa
 
-<aside>
 💡 **Observação**: Como o C# diferencia maiúsculas de minúsculas, a palavra Main não é a mesma que sua grafia em minúsculas, main.
-
-</aside>
 
 A linha 2 do programa acima está usando uma diretiva
 
@@ -80,7 +74,7 @@ A linha 2 do programa acima está usando uma diretiva
 A linha 2 do programa acima está usando uma
 
 - **Diretiva**
-    - Ela declara que o arquivo atual pode usar membros do namespace indicado sem usar o nome completo.
+  - Ela declara que o arquivo atual pode usar membros do namespace indicado sem usar o nome completo.
 
 Sem essa diretiva, todas as referências ao identificador `Console` teriam de ser precedidas por `System` e um ponto, porque `Console` é um membro do namespace `System`.
 
@@ -94,7 +88,7 @@ A declaração de classe, class `HelloWorld`, contém
 - O **método** é o ponto de entrada da aplicação
 - O método `Main` pode ser declarado com um parâmetro para aceitar uma matriz de cadeias de caracteres e pode retornar um valor inteiro.
 - A matriz de cadeias de caracteres passada para o método representa os argumentos da linha de comando usados na execução do programa
-    - Esse programa não usa argumentos de linha de comando e, portanto, o método não foi declarado para aceitar **nenhum** argumento
+  - Esse programa não usa argumentos de linha de comando e, portanto, o método não foi declarado para aceitar **nenhum** argumento
 
 ### Corpo do método principal
 
@@ -103,10 +97,7 @@ A declaração de classe, class `HelloWorld`, contém
 - WriteLine(...) é um método da classe `Console`
 - Usamos o operador ".", ponto, para separar elementos subordinados do programa.
 
-<aside>
 💡 Observe que também poderíamos escrever como System.Console.WriteLine(...).
-
-</aside>
 
 - Isso segue o padrão **namespace.class.method** como uma declaração totalmente qualificada. Se tivéssemos deixado de fora a declaração using `System` na parte superior do programa, teria sido obrigatório usar o caminho completo: `System.Console.WriteLine(...)`. Essa declaração é o que faz com que a string "`Hello, World!`" seja impressa na tela do console.
 
@@ -132,12 +123,12 @@ class HelloWorld
     {
         // Escreve no console
       Console.WriteLine("Digite seu nome:");
-				// Ler do console
-			string name = Console.ReadLine();
-				// escrevendo a string e o argumento adicional no console
-			Console.WriteLine("Oi, {0}", name);
-				// manter o programa em execução até que o usuário pressione Enter
-			Console.ReadLine();
+    // Ler do console
+   string name = Console.ReadLine();
+    // escrevendo a string e o argumento adicional no console
+   Console.WriteLine("Oi, {0}", name);
+    // manter o programa em execução até que o usuário pressione Enter
+   Console.ReadLine();
     }
 }
 ```
@@ -151,10 +142,7 @@ O método `WriteLine` é, na verdade, um pouco mais complicado do que pode parec
 
 A linha final do método é uma espécie de hack que garante que o programa continue em execução até que o usuário pressione a tecla "**Enter**".
 
-<aside>
 💡 **OBSERVAÇÃO IMPORTANTE**: Todas as declarações terminam com `;`, ponto e vírgula. As classes e os métodos começam com `{`, uma chave à **esquerda**, e terminam com `}`, uma chave à **direita**. Todas as instruções dentro e incluindo `{` e `}` definem um bloco. Os blocos definem o escopo (ou tempo de vida e visibilidade) dos elementos do programa.
-
-</aside>
 
 Agora que você conhece a estrutura básica de um programa C#, vamos nos aprofundar em mais detalhes.
 
@@ -163,7 +151,7 @@ Agora que você conhece a estrutura básica de um programa C#, vamos nos aprofun
 Em qualquer linguagem de programação, uma variável é uma parte nomeada da memória do computador, que contém algumas informações em seu interior.
 
 > Pense em uma variável como uma caixa com um nome, onde podemos "armazenar" algo.
-> 
+>
 
 Criamos, editamos e excluímos variáveis, sempre que necessário em nossas tarefas. Elas são **dispositivos** usados para armazenar dados, como um número ou uma cadeia de caracteres.
 
@@ -174,12 +162,12 @@ Programadores usam nomes *simbólicos* para descrever variáveis, como:
 "a quantidade de dinheiro na conta bancária do cliente".
 
 > **Observação**: O compilador auxilia os programadores gerenciando a relação entre as representações simbólicas e numéricas dos locais das variáveis para reduzir o número de erros que os programadores certamente cometeriam se fossem obrigados a se referir a cada variável que têm em mente apenas por seu local atual nas memórias de seus computadores.
-> 
+>
 
 O C# exige que o programador use nomes construídos com letras escolhidas de **a a z**, de **A a Z**, e os números são escolhidos de **0 a 9**. O C# considera que as letras maiúsculas são diferentes das letras minúsculas.
 
 > **Observação importante**: é uma boa prática de programação iniciar os nomes das variáveis com letras minúsculas.
-> 
+>
 
 Assim, o C# permite:
 
@@ -224,7 +212,7 @@ Agora que você tem informações básicas sobre variáveis em C#, vamos aprende
 Uma variável é um local na memória onde o aplicativo pode armazenar algum tipo de informação.
 
 > Você pode pensar na memória como uma "matriz de bytes". Cada byte possui um endereço de memória.
-> 
+>
 
 Após a declaração da variável, um local de memória é reservado para essa variável.
 
@@ -252,10 +240,7 @@ namespace VariaveisExemploUm
 
 Representação de memória para armazenamento de variáveis
 
-<aside>
 💡 **Observação**: 1 byte = 8 bits
-
-</aside>
 
 ## Sintaxe de variável
 
@@ -409,7 +394,7 @@ A variável a contém a
 ```
 
 > **Observação**: ASCII é um sistema em que um valor numérico é atribuído a cada caractere que você possa imaginar. Para obter uma tabela de conversão completa, acesse [http://ascii-code.com/](http://ascii-code.com/)
-> 
+>
 
 ### Boolean
 
@@ -458,7 +443,7 @@ Essa tabela mostra como os tamanhos das variáveis variam de acordo com os tipos
 | string | 16*comprimento | Uma cadeia de caracteres unicode sem limite especial. |
 | object | 32/64 | Dependente da plataforma (um ponteiro para um objeto). |
 
-### Evite qualquer possível erro!
+### Evite qualquer possível erro
 
 Se você tentar armazenar algum valor que exceda o alcance específico de um tipo de variável, receberá um erro de tempo de execução:
 
