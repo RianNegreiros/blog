@@ -218,9 +218,7 @@ Já que o paradigma de programação orientada a objetos se tornou o mais utiliz
 3. **MACHADO, Rodrigo Prestes.** Desenvolvimento de Software III: Programação de Sistemas Web Orientado a Objeto. 3. ed. São Paulo: Bookman, 2016.
 4. **MACORATI.** Disponível em: [http://www.macoratti.net/18/08/c_recurs1.htm](http://www.macoratti.net/18/08/c_recurs1.htm), 2021. Acessado em: 09 dez. 2021.
 5. **MACORATTI, J. P.** C# - Recursos da Linguagem que você deveria conhecer. Macoratti, 2019. Disponível em: [http://www.macoratti.net/18/08/c_recurs1.htm](http://www.macoratti.net/18/08/c_recurs1.htm).
-6. **MARIANO JUNIOR.** Abstração e Encapsulamento - Orientação a Objetos. [https://www.youtube.com/watch?v=X5UkVuJ5np8](https://www.youtube.com/watch?v=X5UkVuJ5np8).
-7. **MORETTO, Luiz Augusto.** Programação Orientada a Objetos: Classes Abstratas. [https://morettic.com.br/wp2/poo/poo-classes-abstratas/](https://morettic.com.br/wp2/poo/poo-classes-abstratas/).
-8. **BR.CCM.NET.** POO – Herança. Disponível em: [https://br.ccm.net/contents/414-poo-heranca](https://br.ccm.net/contents/414-poo-heranca).
+6. **BR.CCM.NET.** POO – Herança. Disponível em: [https://br.ccm.net/contents/414-poo-heranca](https://br.ccm.net/contents/414-poo-heranca).
 9. **BOZ JUNIOR, Geraldo.** Fluxogramas e programação estruturada. [https://www.youtube.com/watch?v=kcic0UK-MMY](https://www.youtube.com/watch?v=kcic0UK-MMY).
 10. **CANAL TI.** O que é programação orientada a objetos. [https://www.youtube.com/watch?v=ojEHf3q7akE](https://www.youtube.com/watch?v=ojEHf3q7akE).
 11. **CURSO EM VÍDEO.** Curso POO Teoria #06a - Pilares da POO: encapsulamento [https://www.youtube.com/watch?v=1wYRGFXpVlg](https://www.youtube.com/watch?v=1wYRGFXpVlg).
