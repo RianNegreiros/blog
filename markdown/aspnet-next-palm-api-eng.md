@@ -298,3 +298,7 @@ In the second code snippet, we're allowing any origin, any header, and any metho
 Remember, improperly configured CORS can lead to errors and potential security risks. If you encounter issues, check your CORS configuration and ensure that the correct origins, headers, and methods are allowed.
 
 That's it! We now have a simple chat interface for interacting with our chatbot API.
+
+---
+
+- [The complete code on GitHub](https://github.com/RianNegreiros/DotNetChatBot)
