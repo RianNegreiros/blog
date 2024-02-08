@@ -291,3 +291,7 @@ No segundo trecho de código, estamos permitindo que qualquer origem, qualquer c
 Lembre-se de que o CORS configurado incorretamente pode levar a erros e possíveis riscos de segurança. Se você encontrar problemas, verifique sua configuração de CORS e certifique-se de que as origens, os cabeçalhos e os métodos corretos sejam permitidos.
 
 É isso aí! Agora temos uma interface de bate-papo simples para interagir com nossa API de chatbot.
+
+---
+
+- [Repositório](https://github.com/RianNegreiros/DotNetChatBot)
