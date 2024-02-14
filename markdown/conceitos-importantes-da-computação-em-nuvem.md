@@ -72,7 +72,7 @@ A computação em nuvem é uma tecnologia transformadora que oferece recursos e 
 
 Referências:
 
-1. "Data Center: Definição, Funções e Componentes." Techopedia, [link](https://www.techopedia.com/definition/16463/data-center).
+1. "Data Center: Definição, Funções e Componentes." Techopedia, [link](https://www.techopedia.com/definition/349/data-center).
 2. "Virtualization vs. Cloud Computing: What’s the Difference?" Business News Daily, [link](https://www.businessnewsdaily.com/5791-virtualization-vs-cloud-computing.html).
 3. "What is Cloud Computing?" Amazon Web Services (AWS), [link](https://aws.amazon.com/what-is-cloud-computing/).
 4. "Security in the Cloud: Security and Compliance." Microsoft Azure, [link](https://azure.microsoft.com/en-us/explore/trusted-cloud/compliance).
