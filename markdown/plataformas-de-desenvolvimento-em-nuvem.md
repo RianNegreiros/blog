@@ -86,7 +86,7 @@ Avance em seus estudos e experimente diferentes plataformas de desenvolvimento e
 - [Google Cloud Documentation](https://cloud.google.com/docs)
 - [Heroku Dev Center](https://devcenter.heroku.com/)
 - [Microsoft Azure Documentation](https://docs.microsoft.com/pt-br/azure/?product=popula)
-- [Microsoft Get Started Guide for Azure](https://docs.microsoft.com/pt-br/azure/get-started/what-is-azure)
+- [Microsoft Get Started Guide for Azure](https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-azure)
 - [Netlify Documentation](https://docs.netlify.com/)
 - [Replit - Code Together](https://replit.com/)
 - [Windows Azure](https://azure.microsoft.com/pt-br/)
