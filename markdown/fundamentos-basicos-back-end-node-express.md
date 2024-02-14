@@ -60,7 +60,7 @@ GASPAR, L. Aprenda o que é NPM e como utilizá-lo. Blog HostGator, 19 fev. 2021
 
 HASHDORK. CodePen vs CodeSandbox vs StackBlitz. Blog HashDork, 5 out. 2021. Disponível em: [https://hashdork.com/pt/codepen-codesandbox-stackblitz/](https://hashdork.com/pt/codepen-codesandbox-stackblitz/). Acesso em: 31 jul. 2022.
 
-NODEJS. Introduction to Node.js. OpenJS Foundation, s. d. Disponível em: [https://nodejs.dev/learn/introduction-to-nodejs](https://nodejs.dev/learn/introduction-to-nodejs). Acesso em: 26 jul. 2022.
+NODEJS. Introduction to Node.js. OpenJS Foundation, s. d. Disponível em: [https://nodejs.org/en/learn/getting-started/introduction-to-nodejs](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs). Acesso em: 26 jul. 2022.
 
 POSTMAN. Introduction. Postman HQ, San Francisco (CA, USA), 5 jul. 2022. Disponível em: [https://learning.postman.com/docs/getting-started/introduction](https://learning.postman.com/docs/getting-started/introduction). Acesso em: 05 ago. 2022.
 
