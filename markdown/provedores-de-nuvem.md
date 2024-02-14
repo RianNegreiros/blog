@@ -53,7 +53,7 @@ A escolha de um provedor de serviços em nuvem é uma decisão crítica que afet
 Lembre-se de que a escolha do provedor de nuvem não é uma decisão única. À medida que as necessidades e tecnologias evoluem, sua estratégia de nuvem pode precisar se adaptar.
 
 1. ADENTRO. "6 Estratégias para Migrar Aplicações para Nuvem." ADENTRO Cloud, Publicado em: 03 maio 2021. [Link](https://adentrocloud.com.br/estrategias-para-migrar-aplicacoes-para-nuvem)
-2. ANG, R. J. "Building Applications using Low-Code and No-Code Platforms." Nurse Developer Column. Canadian Journal of Nursing Informatics, 16 (3-4), 2021. [Link](https://cjni.net/journal/?p=9379)
+2. Forbes Technology Council. "An Introduction To No-Code/Low-Code Platforms." Nurse Developer Column. Forbes, 2023. [Link](https://www.forbes.com/sites/forbestechcouncil/2023/03/07/an-introduction-to-no-codelow-code-platforms-seven-things-you-should-know/?sh=8d2b57b5fe22)
 3. CANALTECH. "5 Dicas para Você Migrar Suas Aplicações para a Nuvem." Canaltech Produção de Mídia. São Bernardo do Campo, SP, 09 dez. 2014. [Link](https://canaltech.com.br/computacao-na-nuvem/5-dicas-para-voce-migrar-suas-aplicacoes-para-a-nuvem)
 4. CANALTECH. "Shadow IT: O que é e Como Lidar com Este Fenômeno Dentro das Empresas." Canaltech Produção de Mídia. São Bernardo do Campo, SP, 10 out. 2014. [Link](https://canaltech.com.br/mercado/Shadow-IT-o-que-e-e-como-lidar-com-este-fenomeno-dentro-das-empresas)
 5. CAPTERRA (ROSSI, L.; LEEUWEN, Q. S.). "O que é Low-Code? Conheça o Desenvolvimento Rápido de Aplicativos." Blog Capterra Brasil, 19 nov. 2020. [Link](https://intl-blog.imgix.net/wp-content/uploads/2020/11/o-que-e-low-code-versus-no-code.png?w=600)
