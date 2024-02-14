@@ -63,7 +63,7 @@ O JavaScript é uma linguagem poderosa que desempenha um papel crucial no desenv
 
 **Referências**
 
-1. **DESENVOLVIMENTO web com HTML, CSS e JavaScript: curso WD-43.** Caelum, [s.d.]. Disponível em: [https://www.caelum.com.br/download/caelum-html-cssjavascript.pdf](https://www.caelum.com.br/download/caelum-html-cssjavascript.pdf). Acesso em: 15 jul. 2022.
+1. **DESENVOLVIMENTO web com HTML, CSS e JavaScript: curso WD-43.** Caelum, [s.d.]. Disponível em: [https://github.com/free-educa/books](https://github.com/free-educa/books/blob/main/books/Desenvolvimento%20Web%20com%20HTML%2C%20CSS%20e%20JavaScript%20-%20Caelum%2C%20Curso%20WD-43.pdf). Acesso em: 15 jul. 2022.
 2. **FLANAGAN, D.** JavaScript: o guia definitivo. 6. ed. Porto Alegre: Bookman, 2013.
 3. **HAVERBEKE, M.** Eloquent JavaScript. 3. ed. San Francisco. 2018.
 4. **MORRISON, M.** Use a Cabeça! JavaScript. Rio de Janeiro: Alta Books, 2008.
