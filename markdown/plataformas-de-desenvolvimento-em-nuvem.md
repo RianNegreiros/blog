@@ -80,7 +80,7 @@ Avance em seus estudos e experimente diferentes plataformas de desenvolvimento e
 - [Amazon Elastic Beanstalk](https://aws.amazon.com/pt/elasticbeanstalk/)
 - [Cloud Foundry - Why Cloud Foundry](https://www.cloudfoundry.org/why-cloud-foundry/)
 - [DigitalOcean Documentation](https://docs.digitalocean.com/)
-- [Engine Yard Kontainers New User Guide](https://support.cloud.engineyard.com/hc/en-us/sections/360009109134-EngineYard-Kontainers-New-User-Guide)
+- [Introcution Engine Yard Kontainers](https://support.cloud.engineyard.com/hc/en-us/articles/360058885853-Introduction-to-Engine-Yard-Kontainers)
 - [GitHub Pages](https://pages.github.com/)
 - [Google App Engine](https://cloud.google.com/appengine)
 - [Google Cloud Documentation](https://cloud.google.com/docs)
