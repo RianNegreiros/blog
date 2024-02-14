@@ -4,7 +4,7 @@ O gerenciamento de sessão no ASP.NET Core depende de cookies HTTP, portanto, va
 
 Atualmente, os cookies são ferramentas indispensáveis para a criação de aplicações web. Isso se deve ao fato de que o armazenamento de dados específicos do usuário não era uma preocupação quando a Web e o HTTP foram criados. De fato, a especificação HTTP afirma desde o início que o protocolo é sem estado. Isso significa que ele não pode armazenar nada - não há "estado" que o cliente mantenha quando comunica com o servidor. Como quase todas as aplicações web complexas precisam armazenar informações, mesmo que seja apenas sobre quem está registrado, não há alternativa viável para os cookies (discutiremos brevemente o armazenamento local e armazenamento de sessão mais adiante neste capítulo). A Figura 3.4 mostra como os cookies funcionam em geral.
 
-![session-cookie-process.png](/assets/session-cookie-process.png)
+![session-cookie-process.png](../assets/session-cookie-process.png)
 
 ## O Processo de Envio e Recebimento de Cookies
 
@@ -37,7 +37,7 @@ Partimos do princípio de que a flag de domínio do cookie não está definida. 
 
 Uma vez que os cookies são armazenados no navegador, seus valores são fáceis de manipular. Obviamente, não faz sentido armazenar informações sensíveis em um cookie, como o nome de usuário atualmente logado ou privilégios específicos do usuário. Mas como armazenar informações vitais enquanto um usuário está interagindo com nossa aplicação? Entra a gestão de sessões. Este mecanismo baseia-se nos cookies, mas reduz os riscos de manipulação de dados, pelo menos até certo ponto. A Figura mostra o processo.
 
-![Screenshot.png](/assets/session-store-process.png)
+![Screenshot.png](../assets/session-store-process.png)
 
 ## O Processo de Gestão de Sessões com Cookies
 
