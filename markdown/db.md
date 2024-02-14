@@ -63,7 +63,7 @@ Agora, discutiremos os sistemas populares de gerenciamento de banco de dados SQL
 
 ### MySQL
 
-O [MySQL](https://www.mysql.com/) está entre os sistemas de gerenciamento de banco de dados mais usados e, no passado, foi parte integrante da maioria das aplicações da Web. O MySQL é apoiado pela Oracle e usa a linguagem de consulta padrão (SQL) para armazenar dados na forma de uma tabela e, para recuperar dados, é necessário fazer consultas em SQL. O MySQL, ao contrário do próprio SQL, funciona em todas as plataformas, incluindo Linux, iOS e Windows, com toda a simplicidade do SQL, pois não exige que você aprenda nenhuma sintaxe nova depois de conhecer o SQL. Vamos dar uma olhada em um exemplo de consulta MySQL que cria uma nova tabela:
+O [MySQL](https://www.mysql.com) está entre os sistemas de gerenciamento de banco de dados mais usados e, no passado, foi parte integrante da maioria das aplicações da Web. O MySQL é apoiado pela Oracle e usa a linguagem de consulta padrão (SQL) para armazenar dados na forma de uma tabela e, para recuperar dados, é necessário fazer consultas em SQL. O MySQL, ao contrário do próprio SQL, funciona em todas as plataformas, incluindo Linux, iOS e Windows, com toda a simplicidade do SQL, pois não exige que você aprenda nenhuma sintaxe nova depois de conhecer o SQL. Vamos dar uma olhada em um exemplo de consulta MySQL que cria uma nova tabela:
 
 ```sql
 CREATE TABLE [IF NOT EXISTS] table_name(
