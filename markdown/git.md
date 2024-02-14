@@ -174,7 +174,7 @@ Primeiro, registre-se no [GitHub](https://github.com/signup). Crie uma conta gra
     <img src="../assets/new-repository.png" alt="Novo repositório" />
 </div>
 
-Em seguida, dê um nome ao seu repository e crie-o! Agora, abra um terminal de linha de comando e mude os diretórios para um repository Git existente. Em seguida, na parte superior da página Quick Setup do seu repository do GitHub, clique para copiar a URL do repository remoto. Ela será parecida com <https://github.com/username/repo-name>. Em seguida, adicione a URL do repository remoto da seguinte forma:
+Em seguida, dê um nome ao seu repository e crie-o! Agora, abra um terminal de linha de comando e mude os diretórios para um repository Git existente. Em seguida, na parte superior da página Quick Setup do seu repository do GitHub, clique para copiar a URL do repository remoto. Ela será parecida com `https://github.com/username/repo-name`. Em seguida, adicione a URL do repository remoto da seguinte forma:
 
 ```bash
 git remote add origin https://github.com/username/repo-name
