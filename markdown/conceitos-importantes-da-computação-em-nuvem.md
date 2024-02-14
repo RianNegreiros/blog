@@ -73,10 +73,7 @@ A computação em nuvem é uma tecnologia transformadora que oferece recursos e 
 Referências:
 
 1. "Data Center: Definição, Funções e Componentes." Techopedia, [link](https://www.techopedia.com/definition/16463/data-center).
-2. "Virtualization vs Cloud Computing: What's the Difference?" VMware, [link](https://www.vmware.com/topics/glossary/content/virtualization).
+2. "Virtualization vs. Cloud Computing: What’s the Difference?" Business News Daily, [link](https://www.businessnewsdaily.com/5791-virtualization-vs-cloud-computing.html).
 3. "What is Cloud Computing?" Amazon Web Services (AWS), [link](https://aws.amazon.com/what-is-cloud-computing/).
-4. "Security in the Cloud: Security and Compliance." Microsoft Azure, [link](https://learn.microsoft.com/en-us/cloud-computing/azure/security).
-5. "Cloud Computing Security: A Comprehensive Guide." CSO Online, [link](https://www.csoonline.com/article/2120971/cloud-computing-security-a-comprehensive-guide.html).
-6. "Cloud Security and Compliance." Google Cloud, [link](https://cloud.google.com/security).
-7. "Risk Management in Cloud Computing: An Analysis and Integration of an Existing Framework with the Cloud Risk Framework." International Journal of Computer Applications, [link](https://www.ijcaonline.org/research/volume117/number6/shukla-2015-ijca-907146.pdf).
-8. "Top 10 Risk Management Strategies for Cloud Security." CIO, [link](https://www.cio.com/article/239314/top-10-risk-management-strategies-for-cloud-security.html).
+4. "Security in the Cloud: Security and Compliance." Microsoft Azure, [link](https://azure.microsoft.com/en-us/explore/trusted-cloud/compliance).
+5. "Cloud Security and Compliance." Google Cloud, [link](https://cloud.google.com/security).
