@@ -14,9 +14,6 @@ Podemos nos comunicar com as **APIs REST** usando solicitações HTTP, da mesma 
 
 Normalmente, enviamos solicitações HTTP a um URL que definimos em nossa **API REST** e ele executaria uma determinada tarefa para nós ou retornaria um determinado bit de dados. Atualmente, a maioria das APIs retorna uma resposta para nós na forma de JSON.
 
-> Para saber mais sobre HTTP eu tenho um artigo sobre [como funciona o HTTP](https://www.riannegreiros.dev/post/como-funciona-o-http)
->
-
 ## Um simples exemplo
 
 Imagine que você escreveu um pouco de código que fornece as condições climáticas atuais em sua casa. Ele lê a temperatura, a umidade e a precipitação e as armazena localmente. Como poderíamos expor essas informações de forma que sites ou outros aplicativos pudessem visualizá-las?
