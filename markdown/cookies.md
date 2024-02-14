@@ -57,7 +57,7 @@ Semelhante à diretiva `Expires`, `Max-Age` especifica o número de segundos at�
 
 ### `Domain`
 
-Esta diretiva define os anfitriões para os quais o cookie deve ser enviado. Lembre-se de que os cookies contêm geralmente dados confidenciais, sendo importante que os navegadores não os divulguem para hosts não confiáveis. Um cookie com a diretiva [`Domain=trusted.example.com`](http://domain%3Dtrusted.example.com/) não será enviado juntamente com pedidos para qualquer domínio que não seja [`trusted.example.com`](http://trusted.example.com/), nem mesmo o domínio raiz, [`example.com`](http://example.com/). Eis um exemplo válido de um cookie limitado a um subdomínio específico: `access_token=1234;[Domain=trusted.example.com](http://domain%3Dtrusted.example.com/)`
+Esta diretiva define os anfitriões para os quais o cookie deve ser enviado. Lembre-se de que os cookies contêm geralmente dados confidenciais, sendo importante que os navegadores não os divulguem para hosts não confiáveis. Um cookie com a diretiva `Domain=trusted.example.com` não será enviado juntamente com pedidos para qualquer domínio que não seja `trusted.example.com`, nem mesmo o domínio raiz, `example.com`. Eis um exemplo válido de um cookie limitado a um subdomínio específico: `access_token=1234;Domain=trusted.example.com`
 
 ### Path
 
@@ -149,7 +149,7 @@ Tradicionalmente, existem duas maneiras de se livrar da CSRF:
 
 ### ****Origin and Referrer headers****
 
-O servidor pode verificar se esses cabeçalhos vêm de fontes confiáveis (ou seja, [https://bank.com](https://bank.com/)). A desvantagem desta abordagem é que, como vimos nos capítulos anteriores, nem a `Origin`, nem o `Referrer` são muito fiáveis e podem ser desativados pelo cliente para proteger a privacidade do utilizador.
+O servidor pode verificar se esses cabeçalhos vêm de fontes confiáveis (ou seja, `https://bank.com`). A desvantagem desta abordagem é que, como vimos nos capítulos anteriores, nem a `Origin`, nem o `Referrer` são muito fiáveis e podem ser desativados pelo cliente para proteger a privacidade do utilizador.
 
 ### Tokens CSRF
 
