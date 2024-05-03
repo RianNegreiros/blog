@@ -26,3 +26,4 @@
 - [Introdução à Programação Orientada a Objetos](./markdown/intro-oop.md)
 - [Criando um ChatBot com ASP.NET Core 8 e PaLM 2 API](./markdown/aspnet-next-palm-api-pt.md)
 - [Building a Chatbot with ASP.NET Core 8 and PaLM 2 API](./markdown/aspnet-next-palm-api-eng.md)
+- [YARP: Yet Another Reverse Proxy](./markdown/yarp.md)
