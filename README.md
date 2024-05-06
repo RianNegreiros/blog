@@ -12,7 +12,6 @@
 - [HTTP Cookies e como protegê-los](./markdown/cookies.md)
 - [Introdução à autenticação na Web](./markdown/webauth.md)
 - [O que é uma API RESTful e como projetar uma?](./markdown/restfulapi.md)
-- [Como subir imagem Docker para Azure Container Registry usando o GitHub Actions](./markdown/build-push-acr.md)
 - [Plataformas de Desenvolvimento em Nuvem: Facilitando a Vida dos Desenvolvedores](./markdown/plataformas-de-desenvolvimento-em-nuvem.md)
 - [Critérios para Escolha de um Provedor de Serviços em Nuvem](./markdown/provedores-de-nuvem.md)
 - [Fundamentos da Computação em Nuvem](./markdown/fundamentos-da-nuvem.md)
