@@ -1,6 +1,6 @@
 ![SAML SSO Authentication](/assets/saml-sso-auth.gif)
 
-# SAML - Security Assertion Markup Language: Identificação e Acesso Corporativo
+# Single Sign-On com SAML: Simplificando o Acesso a Múltiplos Serviços
 
 Nos ambientes empresariais de hoje, a segurança da identidade e do acesso é uma preocupação central. Nesse contexto, o SAML (Security Assertion Markup Language) emerge como um padrão aberto crucial, permitindo a transferência de credenciais de autorização entre provedores de serviços e provedores de identidade. Este artigo explora o SAML e sua aplicação, com destaque para sua relevância no cenário corporativo.
 
@@ -35,3 +35,8 @@ Além de suportar autenticação interna, o SAML pode integrar-se a serviços de
 O SAML desempenha um papel fundamental na garantia da segurança e praticidade no acesso a sistemas corporativos. Sua capacidade de oferecer login único e compartilhamento de sessões de forma segura faz dele uma ferramenta essencial para empresas que buscam simplificar a gestão de identidade e acesso.
 
 Em suma, o SAML continua a ser um componente crucial na arquitetura de segurança de muitas organizações, proporcionando um ambiente seguro e gerenciável para a autenticação e autorização de usuários. Seja em ambientes governamentais ou corporativos, sua adoção é um passo significativo na garantia da integridade e confidencialidade dos dados.
+
+- [What is SAML? | How SAML authentication works | Cloudflare](https://www.cloudflare.com/learning/access-management/what-is-saml/)
+- [What is SAML? Security Assertion Markup Language Explained](https://www.strongdm.com/saml)
+- [SAML Explained in Plain English | OneLogin](https://www.onelogin.com/learn/saml)
+- [O que é SAML? | Como funciona a autenticação SAML | Cloudflare](https://www.cloudflare.com/pt-br/learning/access-management/what-is-saml/)
