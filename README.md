@@ -27,3 +27,4 @@
 - [Building a Chatbot with ASP.NET Core 8 and PaLM 2 API](./markdown/aspnet-next-palm-api-eng.md)
 - [YARP: Yet Another Reverse Proxy](./markdown/yarp.md)
 - [SAML - Security Assertion Markup Language: Identificação e Acesso Corporativo](./markdown/saml.md)
+- [OAuth: Simplificando a Gestão de Identidade e Credenciais](./markdown/oauth.md)
