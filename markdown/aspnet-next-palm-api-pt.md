@@ -2,6 +2,8 @@
 
 Este artigo o guiará pelo processo de criação de uma API no ASP.NET Core 8, que utiliza a API PaLM 2 para gerar respostas dinâmicas para um aplicativo de chatbot. Vamos nos concentrar na funcionalidade principal; por agora, vamos ignorar as configurações de CORS e Swagger.
 
+![Demonstração do Chatbot em funcionamento](/assets/chatbot-demo.gif)
+
 ## Entendendo o código
 
 O código descreve uma estrutura básica para a nossa API:

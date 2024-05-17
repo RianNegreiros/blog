@@ -2,6 +2,8 @@
 
 This blog post will guide you through the process of creating a minimalist API in ASP.NET Core 8, which utilizes the PaLM 2 API to generate dynamic responses for a chatbot application. We'll focus on the core functionality; for now, let's ignore the CORS and Swagger configurations.
 
+![Chatbot working demo](/assets/chatbot-demo.gif)
+
 ## Understanding the Code
 
 The provided code outlines a basic structure for our API:
