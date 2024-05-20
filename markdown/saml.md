@@ -36,7 +36,6 @@ O SAML desempenha um papel fundamental na garantia da segurança e praticidade n
 
 Em suma, o SAML continua a ser um componente crucial na arquitetura de segurança de muitas organizações, proporcionando um ambiente seguro e gerenciável para a autenticação e autorização de usuários. Seja em ambientes governamentais ou corporativos, sua adoção é um passo significativo na garantia da integridade e confidencialidade dos dados.
 
-- [What is SAML? | How SAML authentication works | Cloudflare](https://www.cloudflare.com/learning/access-management/what-is-saml/)
 - [What is SAML? Security Assertion Markup Language Explained](https://www.strongdm.com/saml)
 - [SAML Explained in Plain English | OneLogin](https://www.onelogin.com/learn/saml)
 - [O que é SAML? | Como funciona a autenticação SAML | Cloudflare](https://www.cloudflare.com/pt-br/learning/access-management/what-is-saml/)
