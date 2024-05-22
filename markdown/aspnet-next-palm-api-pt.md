@@ -1,59 +1,89 @@
-# Criando um chatbot com ASP.NET Core 8 e PaLM 2 API
+# Criando um chatbot com ASP.NET Core, Next.js e API PaLM
 
-Este artigo o guiará pelo processo de criação de uma API no ASP.NET Core 8, que utiliza a API PaLM 2 para gerar respostas dinâmicas para um aplicativo de chatbot. Vamos nos concentrar na funcionalidade principal; por agora, vamos ignorar as configurações de CORS e Swagger.
+![chatbot-demo.gif](/assets/chatbot-demo.gif)
 
-![Demonstração do Chatbot em funcionamento](/assets/chatbot-demo.gif)
+Vamos analisar o código passo a passo para entender como ele funciona e o que cada parte faz.
 
-## Entendendo o código
+### Estrutura do projeto
 
-O código descreve uma estrutura básica para a nossa API:
+O projeto está estruturado da seguinte forma:
 
-- **Configuração do modelo de linguagem**: A chave da API e o URL de base são recuperados a partir de variáveis de ambiente.
-- **Definição do Endpoint**: O endpoint `/prompt/{text}` aceita a entrada do usuário como um path parameter.
-- **Interação com a API do PaLM 2**: Um payload é construído com o prompt, a temperature e o candidate count, que é enviado como uma solicitação POST para a API do PaLM 2.
-- **Tratamento da resposta**: A resposta da API é processada e enviada de volta para o cliente.
+```
+├── ChatBot.sln
+├── compose.yaml
+└── src
+    ├── API
+    │   ├── Dockerfile
+    │   ├── Extensions
+    │   │   ├── BuilderExtensions.cs
+    │   │   └── GoogleCloudLanguageApiHealthCheck.cs
+    │   ├── Program.cs
+    │   ├── Using.cs
+    │   ├── appsettings.json
+    └── client
+        ├── Dockerfile
+        ├── app
+        │   ├── components
+        │   │   ├── chat.tsx
+        │   │   ├── danger-error.tsx
+        │   │   └── loading.tsx
+        │   ├── hooks
+        │   │   └── useChat.ts
+        │   ├── layout.tsx
+        │   └── page.tsx
+```
 
-## Melhorias
+### Program.cs
 
-- **Multi-turn dialogues**: Armazena o histórico e o contexto da conversa para personalizar as respostas em todas as mensagens.
-- **Intent recognition**: Integrar ferramentas de [NPL](https://aws.amazon.com/what-is/nlp/) para compreender a intenção do utilizador e gerar respostas relevantes.
-- **Personalização**: Permitir que os utilizadores ajustem os parâmetros da API, como a temperatura, para diferentes estilos de resposta.
-- **Monitorização e registo**: Acompanhe a utilização da API e analise as interacções dos utilizadores para melhorar.
-- **Tratamento de erros**: Implemente um tratamento robusto de erros para falhas de API e solicitações inválidas.
-- **Segurança**: Considere medidas de segurança como rate limiter e validação de entrada para evitar mensagens problemáticas.
-
-Este é apenas um ponto de partida. Sinta-se à vontade para personalizar e expandir este código para criar uma interface de chatbot poderosa!
-
-## Recursos
-
-- [ASP.NET Core 8 Documentação](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
-- [PaLM 2 API Documentação](https://ai.google/discover/palm2/)
-
-Lembre-se, a chave é experimentar, explorar e melhorar constantemente a sua solução de chatbot para proporcionar uma experiência de usuário agradável.
-
-## Código da aplicação
-
-Aqui está o código da aplicação no qual esta postagem se baseia:
+Este é o principal ponto de entrada da aplicação. Estabelece a aplicação Web, configura os serviços e define o pipeline de middleware.
 
 ```csharp
 using System.Text;
 using System.Text.Json;
-using Microsoft.OpenApi.Models;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddServicesExtension();
+builder.Services.AddSwaggerExtension();
+builder.Services.AddCorsExtension(builder.Configuration);
+builder.Services.AddHealthChecksExtension(builder.Configuration);
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddPolicy("fixed", httpContext =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+                factory: partition => new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 10,
+                    Window = TimeSpan.FromSeconds(10)
+                }));
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API for a Chat Bot"));
+
+app.MapHealthChecks("/health");
+
 app.UseHttpsRedirection();
 
-app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
+app.UseRateLimiter();
+
+app.MapPost("/prompt/{text}", async (
+    string text,
+    IHttpClientFactory factory,
+    HttpContext httpContext) =>
 {
-    var languageModelApiKey = app.Configuration["LANGUAGE_MODEL_API_KEY"];
-    var languageModelUrl = $"https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage?key={languageModelApiKey}";
+    var languageModelApiKey = app.Configuration["LANGUAGE_MODEL:API_KEY"];
+    var languageModelUrl = $"{app.Configuration["LANGUAGE_MODEL:URL"]}?key={languageModelApiKey}";
 
     var payload = new
     {
@@ -62,17 +92,25 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
         candidate_count = 1
     };
 
-    using var httpClient = new HttpClient();
-    var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-    var response = await httpClient.PostAsync(languageModelUrl, content);
-    var data = await response.Content.ReadAsStringAsync();
+    try
+    {
+        using var httpClient = factory.CreateClient();
+        var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+        var response = await httpClient.PostAsync(languageModelUrl, content);
+        var data = await response.Content.ReadAsStringAsync();
 
-    Console.WriteLine(data);
-    await httpContext.Response.WriteAsync(data);
+        app.Logger.LogInformation($"Response received from the API: {data}");
+
+        await httpContext.Response.WriteAsync(data);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred while contacting the API.");
+    }
 })
 .WithName("Generate Language Model Response")
 .WithSummary("Return a Language Model Response")
-.WithDescription("Return a Language Model Response from PaLM 2 API")
+.WithDescription("Return a Language Model Response from PaLM API")
 .WithOpenApi(generatedOperation =>
 {
     var parameter = generatedOperation.Parameters[0];
@@ -81,102 +119,338 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
 })
 .Produces(StatusCodes.Status200OK)
 .Produces(StatusCodes.Status400BadRequest)
-.Produces(StatusCodes.Status500InternalServerError);
+.Produces(StatusCodes.Status500InternalServerError)
+.RequireRateLimiting("fixed");
+
+app.UseCors("AllowClient");
 
 app.Run();
 ```
 
-## Integração do front-end
+### Partes Chaves:
 
-Para interagir com nossa API de chatbot, criaremos um frontend simples usando Next.js e React. Esse frontend permitirá que os usuários enviem prompts para a API e exibam as respostas geradas.
+1. **Configuração do serviço**:
+    - `builder.Services.AddServicesExtension()`: Adiciona serviços personalizados definidos em `BuilderExtensions.cs`.
+    - `builder.Services.AddSwaggerExtension()`: Adiciona Swagger para documentação da API.
+    - `builder.Services.AddCorsExtension(builder.Configuration)`: Adiciona política CORS.
+    - `builder.Services.AddHealthChecksExtension(builder.Configuration)`: Adiciona os health checks.
+    - `builder.Services.AddRateLimiter(...)`: Configura o rate limiting para evitar abusos.
+2. **Middleware Pipeline**:
+    - `app.UseSwagger()`: Habilita o middleware Swagger.
+    - `app.UseSwaggerUI(...)`: Configura o Swagger UI.
+    - `app.MapHealthChecks(“/health”)`: Mapeia o endpoint de heath check.
+    - `app.UseRateLimiter()`: Habilita o middleware de rate limiting.
+    - `app.MapPost(“/prompt/{text}”, ...)`: Define um endpoint para gerar uma resposta da API PaLM.
 
-### Configuração de variáveis de ambiente
+### Extensions/BuilderExtensions.cs
 
-Primeiro, precisamos especificar o URL da nossa API em um arquivo `.env`:
+Esse arquivo contém os métodos para adicionar os serviços para o contêiner de injeção de dependência
 
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5111
+```csharp
+using Microsoft.OpenApi.Models;
+
+namespace API.Extensions;
+
+public static class BuilderExtensions
+{
+    public static void AddSwaggerExtension(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "Chat bot API",
+            Description = "A ASP.NET Core 8 minimal API to generate messages for a chat bot using PaLM 2 API",
+        }));
+    }
+
+    public static void AddCorsExtension(this IServiceCollection services, IConfiguration config)
+    {
+        var clientUrl = config["Client_Url"] ?? "http://localhost:3000";
+
+        services.AddCors(options => options.AddPolicy(name: "AllowClient", policy =>
+        policy.WithOrigins(clientUrl)
+        .AllowAnyHeader()
+        .WithMethods("POST")));
+    }
+
+    public static void AddHealthChecksExtension(this IServiceCollection services, IConfiguration config)
+    {
+        services.AddHttpClient();
+        services.AddHealthChecks()
+          .AddCheck("google-api", new GoogleColabHealthCheck(services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>(), config, services.BuildServiceProvider().GetRequiredService<ILogger<GoogleColabHealthCheck>>()));
+    }
+
+    public static void AddServicesExtension(this IServiceCollection services)
+    {
+        services.AddHttpClient();
+    }
+}
 ```
 
-### Chat Component
+### Métodos chave
 
-O `Chat` component é responsável por manipular a entrada do usuário, enviar solicitações à API e exibir o histórico da conversa. Ele usa os hooks `useState` e `useEffect` para gerenciar o estado e os efeitos colaterais.
+1. **AddSwaggerExtension**: Configura o Swagger para a documentação da API.
+2. **AddCorsExtension**: Configura o CORS para permitir requisições dos clientes especificadas.
+3. **AddHealthChecksExtension**: Adiciona verificações de integridade, incluindo uma verificação personalizada para a API do Google.
+4. **AddServicesExtension**: Adiciona serviços de cliente HTTP.
 
-O input de chat é uma versão modificada do [Flowbite](https://flowbite.com/docs/forms/textarea/#chatroom-input).
+### Extensions/GoogleCloudLanguageApiHealthCheck.cs
 
-```jsx
-"use client"
+Este arquivo define um controller de health check personalizado para a API do Google.
 
-import React, { useEffect, useState } from "react"
-import Loading from "./loading";
-import ReactMarkdown from "react-markdown";
+```csharp
+using System.Text;
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-type Message = {
-  author: string;
-  content: string;
+namespace API.Extensions;
+
+public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<GoogleColabHealthCheck> logger) : IHealthCheck
+{
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
+    private readonly IConfiguration _configuration = configuration;
+    private readonly ILogger<GoogleColabHealthCheck> _logger = logger;
+
+    public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var languageModelApiKey = _configuration["LANGUAGE_MODEL:API_KEY"];
+            var request = new HttpRequestMessage(HttpMethod.Post, $"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={languageModelApiKey}")
+            {
+                Content = new StringContent(
+                "{ \"contents\":[{\"parts\":[{\"text\":\"hi\"}]}] }",
+                Encoding.UTF8,
+                "application/json")
+            };
+
+            HttpResponseMessage response = await httpClient.SendAsync(request, cancellationToken);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("Google API responded with success status code.");
+                return HealthCheckResult.Healthy();
+            }
+            else
+            {
+                _logger.LogError($"Google API responded with: {response.StatusCode} - {response.ReasonPhrase}");
+                return HealthCheckResult.Unhealthy($"Google API responded with: {response.StatusCode} - {response.ReasonPhrase}");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while contacting Google API.");
+            return HealthCheckResult.Unhealthy("An error occurred while contacting Google API: " + ex.Message);
+        }
+    }
 }
+```
+
+### Pontos chave
+
+- **CheckHealthAsync**: Este método envia uma request para a API do Google e verifica se a resposta é bem sucedida. Se a API responder com um código de sucesso, devolve `HealthCheckResult.Healthy()`. Caso contrário, devolve `HealthCheckResult.Unhealthy()` com os detalhes do erro.
+
+### appsettings.json
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "LANGUAGE_MODEL": {
+    "URL": "https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage",
+    "API_KEY": ""
+  }
+  "AllowedHosts": "*",
+  "ClientUrl": "http://localhost:3000"
+}
+```
+
+### Definições de chave:
+
+- **ClientUrl**: Especifica o URL da aplicação cliente.
+- **LANGUAGE_MODEL:URL**: URL da API para fazer requests à API do PaLM.
+- **LANGUAGE_MODEL:API_KEY**: chave para dar acesso à API do PaLM.
+
+Pode-se obter a chave da API e o URL da API REST aqui:
+
+[Tutorial: Get started with the Gemini API](https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=rest)
+
+### Using.cs (Opcional)
+
+Esse arquivo contém diretivas de uso globais para simplificar o código.
+
+```csharp
+global using API.Extensions;
+```
+
+### Resumo
+
+- **Program.cs**: Configura o aplicativo da Web, configura os serviços e define o pipeline de middleware.
+- **BuilderExtensions.cs**: Contém métodos de extensão para adicionar vários serviços ao contêiner DI.
+- **GoogleCloudLanguageApiHealthCheck.cs**: Define um health check personalizada para a API do Google.
+
+## Cliente
+
+Agora vamos analisar o código do cliente do chatbot.
+
+### Configuração do projeto
+
+1. **Criando o projeto**:
+    
+    ```bash
+    cd src
+    npx create-next-app@latest client --typescript
+    cd client
+    ```
+    
+2. **Instalando o TailwindCSS**:
+    
+    ```bash
+    npm install -D tailwindcss postcss autoprefixer
+    npx tailwindcss init -p
+    ```
+    
+3. **Configurando o TailwindCSS**:
+   - `tailwind.config.js`:
+        
+        ```jsx
+        import type { Config } from 'tailwindcss'
+        
+        const config: Config = {
+          content: [
+            './pages/**/*.{js,ts,jsx,tsx,mdx}',
+            './components/**/*.{js,ts,jsx,tsx,mdx}',
+            './app/**/*.{js,ts,jsx,tsx,mdx}',
+          ],
+          theme: {
+            extend: {
+              backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                'gradient-conic':
+                  'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+              },
+              animation: {
+                'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'pulse-normal': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              },
+            },
+          },
+          plugins: [],
+        }
+        export default config
+        ```
+        
+    - `styles/globals.css`:
+        
+        ```css
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        ```
+
+4. **Configuração de variáveis de ambiente**:
+    - `.env.local`:
+        
+        ```
+        NEXT_PUBLIC_API_URL=http://localhost:8080
+        ```
+
+### Componentes
+
+### `components/chat.tsx`
+
+Este é o componente principal do chat que lida com a entrada do usuário, exibe mensagens e mostra os estados de carregamento e erro.
+
+O styling desse component é feito a partir desse componente da **Flowbite**:
+
+[Tailwind CSS Textarea - Flowbite](https://flowbite.com/docs/forms/textarea/#chatroom-input)
+
+```tsx
+'use client'
+
+import React, { useEffect, useRef } from 'react'
+import Loading from './loading'
+import ReactMarkdown from 'react-markdown'
+import DangerError from './danger-error'
+import { useChat } from '../hooks/useChat'
 
 export default function Chat() {
-  const [text, setText] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const {
+    text,
+    setText,
+    messages,
+    isLoading,
+    errorMessage,
+    handleSubmit,
+    dismissError,
+  } = useChat()
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const savedMessages = sessionStorage.getItem('messages');
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  useEffect(() => {
+    if (!isLoading) {
+      inputRef.current?.focus();
     }
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setMessages(prevMessages => {
-      const newMessages = [...prevMessages, { author: 'User', content: text }];
-      sessionStorage.setItem('messages', JSON.stringify(newMessages));
-      return newMessages;
-    })
-    setText('')
-    setTimeout(getResponse, 0)
-  }
-
-  const getResponse = async () => {
-    setIsLoading(true)
-    const response = await fetch(`${API_URL}/prompt/${text}`)
-    const data = await response.json()
-    setMessages(prevMessages => {
-      const newMessages = [...prevMessages, { author: 'Bot', content: data.candidates[0].content }];
-      sessionStorage.setItem('messages', JSON.stringify(newMessages));
-      return newMessages;
-    })
-    setIsLoading(false)
-  }
+  }, [isLoading]);
 
   return (
-    <div className="p-6">
-      <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-6">Chatbot</h2>
-      <div className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4">
+    <div className='p-6'>
+      {errorMessage && (
+        <DangerError message={errorMessage} dismissError={dismissError} />
+      )}
+      <div className='mb-4 rounded-lg border border-gray-200 p-4 dark:border-gray-700 dark:bg-gray-900'>
         {messages.map((message, index) => (
-          <div key={index} className={`mb-4 ${message.author === 'Bot' ? 'text-blue-500' : 'text-green-500'}`}>
-            <strong>{message.author}</strong>: <ReactMarkdown>{message.content}</ReactMarkdown>
+          <div
+            key={index}
+            className={`mb-4 ${message.author === 'Bot' ? 'text-blue-500' : 'text-green-500'}`}
+          >
+            <strong>{message.author}</strong>:{' '}
+            <ReactMarkdown>{message.content}</ReactMarkdown>
           </div>
         ))}
+        <div ref={messagesEndRef} />
+        {isLoading && <Loading />}
       </div>
-      {isLoading && <Loading />}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="chat" className="sr-only">Your message</label>
-        <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+        <label htmlFor='chat' className='sr-only'>
+          Your message
+        </label>
+        <div className='flex items-center rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-700'>
           <input
-            id="chat"
-            className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Your message..." value={text} onChange={(e) => setText(e.target.value)}
+            id='chat'
+            disabled={isLoading}
+            ref={inputRef}
+            className='mx-4 block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+            placeholder='Your message...'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
-          <button type="submit" className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
-            <svg className="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-              <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
+          <button
+            type='submit'
+            disabled={isLoading}
+            className='inline-flex cursor-pointer justify-center rounded-full p-2 text-blue-600 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600'
+          >
+            <svg
+              className='h-5 w-5 rotate-90 rtl:-rotate-90'
+              aria-hidden='true'
+              xmlns='<http://www.w3.org/2000/svg>'
+              fill='currentColor'
+              viewBox='0 0 18 20'
+            >
+              <path d='m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z' />
             </svg>
-            <span className="sr-only">Send message</span>
+            <span className='sr-only'>Send message</span>
           </button>
         </div>
       </form>
@@ -185,115 +459,259 @@ export default function Chat() {
 }
 ```
 
-Estamos usando o package `react-markdown` para formatar as respostas do bot. Isso nos permite incluir a formatação markdown em nossas respostas, o que pode ser útil para exibir dados estruturados, links etc.
+- **UseChat Hook**: Esse hook gerencia o estado do chat, incluindo a entrada de texto, as mensagens, o estado de carregamento e o tratamento de erros.
+- **UseRef**: Usado para manter referências ao campo de entrada e ao final da lista de mensagens para rolagem.
+- **useEffect**: Usado para rolar até a última mensagem e focar o campo de entrada quando não estiver carregando.
 
-### Loading Component
+### `components/loading.tsx`
 
-O componente `Loading` exibe uma animação de carregamento enquanto a resposta da API está sendo obtida.
+Esse componente exibe uma animação de carregamento enquanto aguarda a resposta do bot.
 
-Esse indicador de carregamento é da [Flowbite](https://flowbite.com/docs/components/skeleton/#text-placeholder) com alguns ajustes para combinar com o estilo da aplicação.
+Esse componente é uma modificação refatorada da **Flowbite**:
 
-```jsx
+[Tailwind CSS Skeleton - Flowbite](https://flowbite.com/docs/components/skeleton/#text-placeholder)
+
+```tsx
+interface LoadingBarProps {
+  width: string;
+  animation: string;
+  bgColor: string;
+  marginLeft: string;
+}
+
+const LoadingBar: React.FC<LoadingBarProps> = ({ width, animation, bgColor, marginLeft }) => (
+  <div className={`h-2.5 ${width} ${animation} rounded-full ${bgColor} ${marginLeft}`}></div>
+);
+
 export default function Loading() {
+  const loadingBars = [
+    [
+      { width: 'w-32', animation: 'animate-pulse-slow', bgColor: 'bg-gray-200 dark:bg-gray-700', marginLeft: '' },
+      { width: 'w-24', animation: 'animate-pulse-normal', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+      { width: 'w-full', animation: 'animate-pulse-fast', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+    ],
+    [
+      { width: 'w-full', animation: 'animate-pulse-normal', bgColor: 'bg-gray-200 dark:bg-gray-700', marginLeft: '' },
+      { width: 'w-full', animation: 'animate-pulse-slow', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+      { width: 'w-24', animation: 'animate-pulse-fast', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+    ],
+    [
+      { width: 'w-full', animation: 'animate-pulse-fast', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: '' },
+      { width: 'w-80', animation: 'animate-pulse-normal', bgColor: 'bg-gray-200 dark:bg-gray-700', marginLeft: 'ms-2' },
+      { width: 'w-full', animation: 'animate-pulse-slow', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+    ],
+    [
+      { width: 'w-full', animation: 'animate-pulse-slow', bgColor: 'bg-gray-200 dark:bg-gray-700', marginLeft: 'ms-2' },
+      { width: 'w-full', animation: 'animate-pulse-normal', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+      { width: 'w-24', animation: 'animate-pulse-fast', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+    ],
+    [
+      { width: 'w-32', animation: 'animate-pulse-normal', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+      { width: 'w-24', animation: 'animate-pulse-slow', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+      { width: 'w-full', animation: 'animate-pulse-fast', bgColor: 'bg-gray-200 dark:bg-gray-700', marginLeft: 'ms-2' },
+    ],
+    [
+      { width: 'w-full', animation: 'animate-pulse-fast', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+      { width: 'w-80', animation: 'animate-pulse-normal', bgColor: 'bg-gray-200 dark:bg-gray-700', marginLeft: 'ms-2' },
+      { width: 'w-full', animation: 'animate-pulse-slow', bgColor: 'bg-gray-300 dark:bg-gray-600', marginLeft: 'ms-2' },
+    ],
+  ];
+
   return (
-    <div role="status" className="p-6 border border-gray-200 dark:border-gray-700 dark:bg-gray-900 rounded-lg mb-4 space-y-2.5 animate-pulse max-w-lg">
-      <div className="flex items-center w-full">
-        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-      </div>
-      <div className="flex items-center w-full max-w-[480px]">
-        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-      </div>
-      <div className="flex items-center w-full max-w-[400px]">
-        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-        <div className="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-      </div>
-      <div className="flex items-center w-full max-w-[480px]">
-        <div className="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-      </div>
-      <div className="flex items-center w-full max-w-[440px]">
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-32"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-        <div className="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-      </div>
-      <div className="flex items-center w-full max-w-[360px]">
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-        <div className="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
-        <div className="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-      </div>
-      <span className="sr-only">Loading...</span>
+    <div role='status' className='mb-4 space-y-2.5 p-6 dark:bg-gray-900'>
+      {loadingBars.map((bars, index) => (
+        <div key={index} className='flex w-full items-center'>
+          {bars.map((bar, idx) => (
+            <LoadingBar key={idx} {...bar} />
+          ))}
+        </div>
+      ))}
+      <span className='sr-only'>Loading...</span>
+    </div>
+  );
+}
+```
+
+- **Loading Animation**: Usa as classes TailwindCSS para criar um efeito de animação pulsante.
+
+### `components/danger-error.tsx`
+
+Esse componente exibe uma mensagem de erro quando algo dá errado.
+
+O styling desse component é feito a partir desse componente da **Flowbite**:
+[Tailwind CSS Alerts - Flowbite](https://flowbite.com/docs/components/alerts/#border-accent)
+
+```tsx
+interface DangerErrorTypes {
+  message: string
+  dismissError: () => void
+}
+
+export default function DangerError({
+  message,
+  dismissError,
+}: DangerErrorTypes) {
+  return (
+    <div
+      id='alert-border-2'
+      className='mb-4 flex items-center border-t-4 border-red-300 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400'
+      role='alert'
+    >
+      <svg
+        className='h-4 w-4 flex-shrink-0'
+        aria-hidden='true'
+        xmlns='<http://www.w3.org/2000/svg>'
+        fill='currentColor'
+        viewBox='0 0 20 20'
+      >
+        <path d='M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z' />
+      </svg>
+      <div className='ms-3 text-sm font-medium'>{message}</div>
+      <button
+        type='button'
+        onClick={dismissError}
+        className='-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 p-1.5 text-red-500 hover:bg-red-200 focus:ring-2 focus:ring-red-400 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700'
+        data-dismiss-target='#alert-border-2'
+        aria-label='Close'
+      >
+        <span className='sr-only'>Dismiss</span>
+        <svg
+          className='h-3 w-3'
+          aria-hidden='true'
+          xmlns='<http://www.w3.org/2000/svg>'
+          fill='none'
+          viewBox='0 0 14 14'
+        >
+          <path
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
+            d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
+          />
+        </svg>
+      </button>
     </div>
   )
 }
 ```
 
-### Main Page
+- **Tratamento de erros**: Exibe uma mensagem de erro com um botão de ignorar.
 
-Por fim, incluímos o componente `Chat` em nossa página principal:
+### Hook
 
-```jsx
-import Chat from "./components/chat";
+### `hooks/useChat.ts`
 
-export default function Home() {
-  return (
-    <Chat />
-  );
+Esse hook gerencia o estado do chat, incluindo as respostas da API.
+
+```tsx
+import { useState, useEffect } from 'react'
+import axios, { AxiosError } from 'axios'
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+type Message = {
+  author: string
+  content: string
+}
+
+export const useChat = () => {
+  const [text, setText] = useState('')
+  const [messages, setMessages] = useState<Message[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  useEffect(() => {
+    const savedMessages = sessionStorage.getItem('messages')
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages))
+    }
+  }, [])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setMessages((prevMessages) => {
+      const newMessages = [...prevMessages, { author: 'User', content: text }]
+      sessionStorage.setItem('messages', JSON.stringify(newMessages))
+      return newMessages
+    })
+    setText('')
+    setTimeout(getResponse, 0)
+  }
+
+  const getResponse = async () => {
+    setIsLoading(true)
+    try {
+      const response = await axios.get(`${API_URL}/prompt/${text}`)
+      const data = response.data
+      setMessages((prevMessages) => {
+        const newMessages = [
+          ...prevMessages,
+          { author: 'Bot', content: data.candidates[0].content },
+        ]
+        sessionStorage.setItem('messages', JSON.stringify(newMessages))
+        return newMessages
+      })
+    } catch (error) {
+      const axiosError = error as AxiosError
+      let errorMessage = 'An unexpected error occurred'
+      if (axiosError.response) {
+        errorMessage = axiosError.message
+      }
+      setErrorMessage(errorMessage)
+    }
+    setIsLoading(false)
+  }
+
+  const dismissError = () => {
+    setErrorMessage(null)
+  }
+
+  return {
+    text,
+    setText,
+    messages,
+    isLoading,
+    errorMessage,
+    handleSubmit,
+    dismissError,
+  }
 }
 ```
 
-mas antes de podermos acessar nosso cliente em `localhost:3000`
+- **Gerenciamento de estado**: Gerencia o estado da entrada de texto, das mensagens, do estado de carregamento e das mensagens de erro.
+- **UseEffect**: Carrega mensagens salvas do `sessionStorage` na renderização inicial.
+- **handleSubmit**: Lida com o envio de formulários, atualiza mensagens e aciona a resposta do bot.
+- **getResponse**: Obtém a resposta do bot da API e atualiza as mensagens.
 
-### Configuração de CORS
+### Página principal
 
-O CORS é uma medida de segurança que permite ou nega que solicitações provenientes de origens diferentes acessem recursos de um servidor. É fundamental configurar o CORS em seu aplicativo para controlar quem pode interagir com seu servidor.
+### `app/page.tsx`
 
-Agora, vamos ver duas maneiras de configurar o CORS na sua aplicação:
+Renderizamos o componente `Chat`.
 
-```csharp
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "AllowLocalClient", policy =>
-    policy.WithOrigins(builder.Configuration["Client_Url"] ?? "http://localhost:3000")
-    .AllowAnyHeader()
-    .WithMethods("GET"));
-});
+```tsx
+import Chat from '../components/chat'
 
-var app = builder.Build();
-
-app.UseCors("AllowLocalClient");
-
-app.Run();
+export default function Home() {
+  return <Chat />
+}
 ```
 
-No código acima, estamos especificando uma origem específica (`http://localhost:3000`) que tem permissão para acessar o servidor. Esse método é mais seguro, pois restringe o acesso a uma origem específica. O `builder.Configuration["Client_Url"]` é uma forma de obter a URL do cliente a partir de variáveis de ambiente, o que é uma prática mais segura do que colocar direto no código.
+### Executando o aplicativo
 
-```csharp
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});
+Por fim, executamos a aplicação:
 
-app.UseCors();
+```bash
+npm run dev
 ```
 
-No segundo trecho de código, estamos permitindo que qualquer origem, qualquer cabeçalho e qualquer método acesse o servidor. Essa é uma configuração mais genérica e pode expor seu servidor a solicitações indesejadas, portanto, use-a com cautela.
+Vá até `http://localhost:3000` no navegador para ver o client do chatbot em funcionamento.
 
-Lembre-se de que o CORS configurado incorretamente pode levar a erros e possíveis riscos de segurança. Se você encontrar problemas, verifique sua configuração de CORS e certifique-se de que as origens, os cabeçalhos e os métodos corretos sejam permitidos.
+### Conclusão
 
-É isso aí! Agora temos uma interface de bate-papo simples para interagir com nossa API de chatbot.
+Esse código implementa um cliente Next.js com TypeScript e TailwindCSS para um chatbot. O componente `Chat` manipula a entrada do usuário, exibe mensagens e gerencia os estados de carregamento e erro. O hook `useChat` gerencia o estado do chat e interage com a API do chatbot.
 
----
+[Repositório do código](https://github.com/RianNegreiros/DotNetChatBot)
 
-- [Repositório](https://github.com/RianNegreiros/DotNetChatBot)
+[Inspirado pelo vídeo - PaLM 2 API Course – Build Generative AI Apps da freeCodeCamp](https://www.youtube.com/watch?v=LHbtSrkTsIE)
