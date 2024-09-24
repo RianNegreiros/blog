@@ -36,6 +36,109 @@ YARP oferece várias vantagens em relação às outras ferramentas de proxy reve
 * **Segurança**: O software inclui recursos avançados de segurança, como autenticação e autorização, para proteger os servidores originais.
 * **Flexibilidade**: YARP suporta vários protocolos e pode ser facilmente integrado com outros sistemas.
 
+## Exemplo de Configuração do YARP em uma API ASP.NET Core 8
+
+Vamos passo a passo entender como se configura o YARP ([Yet Another Reverse Proxy](https://microsoft.github.io/reverse-proxy/)) em uma aplicação [ASP.NET Core](https://dotnet.microsoft.com/en-us/apps/aspnet) 8.
+
+### 1. Importações Necessárias
+
+```csharp
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Yarp.ReverseProxy.Configuration;
+
+```
+
+Esses `using` directives importam os namespaces necessários para configurar e usar o YARP e os serviços do [ASP.NET](http://asp.net/) Core.
+
+### 2. Criação do Builder da Aplicação
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+```
+
+Aqui, estamos criando um `WebApplicationBuilder`, que é uma nova maneira de configurar e inicializar uma aplicação [ASP.NET](http://asp.net/) Core.
+
+### 3. Adicionando Serviços do YARP
+
+```csharp
+builder.Services.AddReverseProxy()
+    .LoadFromMemory(new[]
+    {
+        new RouteConfig
+        {
+            RouteId = "route1",
+            ClusterId = "cluster1",
+            Match = new RouteMatch
+            {
+                Path = "{**catch-all}"
+            }
+        }
+    },
+    new[]
+    {
+        new ClusterConfig
+        {
+            ClusterId = "cluster1",
+            Destinations = new Dictionary<string, DestinationConfig>
+            {
+                { "destination1", new DestinationConfig { Address = "<https://example.com>" } }
+            }
+        }
+    });
+
+```
+
+Aqui, estamos adicionando o serviço de proxy reverso do YARP ao contêiner de serviços da aplicação. Vamos detalhar cada parte:
+
+- `AddReverseProxy()`: Adiciona os serviços necessários para o YARP.
+- `LoadFromMemory()`: Carrega a configuração do YARP diretamente da memória. Estamos passando duas configurações principais:
+    - **RouteConfig**: Define uma rota para o proxy.
+        - `RouteId`: Identificador único da rota.
+        - `ClusterId`: Identificador do cluster ao qual esta rota está associada.
+        - `Match`: Define como a rota deve ser correspondida. Aqui, `{**catch-all}` significa que qualquer caminho será correspondido.
+    - **ClusterConfig**: Define um cluster de destinos.
+        - `ClusterId`: Identificador único do cluster.
+        - `Destinations`: Um dicionário de destinos para o cluster. Cada destino tem um identificador e uma configuração de endereço. Neste caso, estamos direcionando para `https://example.com`.
+
+### 4. Construção da Aplicação
+
+```csharp
+var app = builder.Build();
+
+```
+
+Aqui, estamos construindo a aplicação com base na configuração definida anteriormente.
+
+### 5. Mapeamento do Middleware do YARP
+
+```csharp
+app.MapReverseProxy();
+
+```
+
+Este método adiciona o middleware do YARP ao pipeline de processamento de requisições da aplicação. Isso significa que todas as requisições que correspondem à rota definida serão processadas pelo YARP e redirecionadas para o destino configurado.
+
+### 6. Execução da Aplicação
+
+```csharp
+app.Run();
+
+```
+
+Finalmente, este método inicia a aplicação e começa a escutar por requisições HTTP.
+
+### Resumo
+
+Este código configura um proxy reverso simples usando YARP em uma aplicação [ASP.NET](http://asp.net/) Core 8. Ele define uma rota que captura todas as requisições (`{**catch-all}`) e as redireciona para `https://example.com`. O YARP é adicionado como um serviço e configurado para ser usado como middleware no pipeline de requisições da aplicação.
+
+**Conclusão**
+
+YARP é uma ferramenta inovadora e escalável de proxy reverso que oferece várias vantagens em relação às outras soluções. Com sua robusta implementação de segurança, flexibilidade e escalabilidade, YARP é uma escolha ideal para ambientes que necessitam de uma solução de proxy reverso confiável e eficiente.
+
+Fonte: <https://microsoft.github.io/reverse-proxy/>
+
 **Recomendações**
 
 Para aprender mais sobre como usar o YARP, é recomendável assistir aos seguintes vídeos:
@@ -47,9 +150,3 @@ E para entender melhor sobre o conceito de proxy reverso e sua aplicação em di
 
 1. "Descubra como utilizar Proxy Reverso para proteger sua aplicação e melhorar a performance" - https://www.youtube.com/watch?v=E51dIa0ZcGs
 2. "Proxy vs Reverse Proxy (Real-world Examples)" - https://www.youtube.com/watch?v=4NB0NDtOwIQ
-
-**Conclusão**
-
-YARP é uma ferramenta inovadora e escalável de proxy reverso que oferece várias vantagens em relação às outras soluções. Com sua robusta implementação de segurança, flexibilidade e escalabilidade, YARP é uma escolha ideal para ambientes que necessitam de uma solução de proxy reverso confiável e eficiente.
-
-Fonte: <https://microsoft.github.io/reverse-proxy/>
