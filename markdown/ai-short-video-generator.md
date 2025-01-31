@@ -2012,6 +2012,7 @@ export default function ShortVideoGrid() {
 
 5.4 Style o Remotion Player em remotion/Composition.tsx que você criou seguindo este guia: [**Installing Remotion in an existing project**](https://www.remotion.dev/docs/brownfield)
 
+{% raw %}
 ```tsx
 import { TranscriptSegment, VideoData } from '@/app/lib/interface'
 import { useEffect, useState } from 'react'
@@ -2111,6 +2112,7 @@ export const MyComposition = ({
   )
 }
 ```
+{% endraw %}
 
 ### 6. Renderização de um vídeo
 
