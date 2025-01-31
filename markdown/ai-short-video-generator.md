@@ -142,6 +142,7 @@ Certifique-se de selecionar Tailwind CSS, selecione os outros prompts com base e
 
 3.3 Crie uma classe de serviço para a Gemini API.
 
+{% raw %}
 ```csharp
 using System;
 using System.Net.Http;
@@ -224,6 +225,7 @@ public class GeminiApiService(HttpClient httpClient, IConfiguration configuratio
     }
 }
 ```
+{% endraw %}
 
 Adicione ao `Program.cs`:
 
