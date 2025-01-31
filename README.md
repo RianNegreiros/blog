@@ -28,3 +28,4 @@
 - [YARP: Yet Another Reverse Proxy](./markdown/yarp.md)
 - [SAML - Security Assertion Markup Language: Identificação e Acesso Corporativo](./markdown/saml.md)
 - [OAuth: Simplificando a Gestão de Identidade e Credenciais](./markdown/oauth.md)
+- [Construindo um gerador de vídeos curtos com tecnologia de IA](./markdown/ai-short-video-generator.md)

@@ -1,7 +1,5 @@
 # Construindo um gerador de vídeos curtos com tecnologia de IA
 
-# Gerador de vídeos curtos sobre IA
-
 ### **Introdução**
 
 O AI Shorts Video Generator é uma ferramenta projetada para automatizar a criação de vídeos curtos, aproveitando as tecnologias de IA. Ela simplifica o processo de transformação de um prompt de texto em um vídeo completo, incluindo roteiro, narração e montagem de vídeo.
@@ -15,7 +13,7 @@ Para configurar e replicar o AI Shorts Video Generator, verifique se você atend
 ### **Requisitos do sistema**
 
 - **Node.js**: Versão 22.x ou superior.
-- **.NET SDK**: Versão 9 ou superior. [Faça o download aqui](https://dotnet.microsoft.com/download/dotnet)
+- **.NET SDK**: Versão 9 ou superior.
 - **PostgreSQL**: Para gerenciamento de banco de dados (por exemplo, [Neon Serverless Postgres](https://neon.tech/)).
 - **Contas na**:
     - [Cloudinary](https://cloudinary.com/) para armazenamento e processamento de mídia.
@@ -43,30 +41,28 @@ Configure as seguintes variáveis de ambiente para permitir a integração adequ
 NEXT_PUBLIC_API_URL=<sua URL de API>
 REMOTION_AWS_SERVE_URL=<Sua URL do AWS Serve>
 REMOTION_AWS_BUCKET_NAME=<Seu nome de bucket do AWS>
-
 ```
 
 **Backend (`appsettings.json`):**
 
 ```json
-{
-  “GoogleApi": {
-    “GeminiKey": “your-gemini-api-key”,
-    “TextToSpeechKey": “your-text-to-speech-api-key”
-  },
-  “AssemblyAi": {
-    “ApiKey": “your-assemblyai-api-key”
-  },
-  “CloudinaryUrl": “your-cloudinary-url”,
-  “Cloudflare": {
-    “ApiKey": “your-cloudflare-api-key”,
-    “AccountId": “your-cloudflare-account-id”
-  },
-  “ConnectionStrings": {
-    “DefaultConnection” (Conexão Padrão): “your-postgresql-connection-string”
+  {
+    “GoogleApi": {
+      “GeminiKey": “your-gemini-api-key”,
+      “TextToSpeechKey": “your-text-to-speech-api-key”
+    },
+    “AssemblyAi": {
+      “ApiKey": “your-assemblyai-api-key”
+    },
+    “CloudinaryUrl": “your-cloudinary-url”,
+    “Cloudflare": {
+      “ApiKey": “your-cloudflare-api-key”,
+      “AccountId": “your-cloudflare-account-id”
+    },
+    “ConnectionStrings": {
+      “DefaultConnection”: “your-postgresql-connection-string”
+    }
   }
-}
-
 ```
 
 ### **Conhecimento recomendado**
@@ -79,7 +75,7 @@ REMOTION_AWS_BUCKET_NAME=<Seu nome de bucket do AWS>
 
 O AI Shorts Video Generator foi projetado para simplificar a criação de vídeos curtos aproveitando vários serviços de IA. Esta seção descreve o fluxo e os principais componentes do sistema.
 
-### Fluxo de trabalho de alto nível
+### Flow Chart
 
 ![create-short-video-flow-chart.png](/assets/create-short-video-flow-chart.png)
 
