@@ -1,5 +1,10 @@
 # Construindo um gerador de vídeos curtos com tecnologia de IA
 
+<video width="600" controls>
+  <source src="/assets/ai-short-video-generator-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ![](/assets/ai-short-video-generator-demo.gif)
 
 ### **Introdução**
