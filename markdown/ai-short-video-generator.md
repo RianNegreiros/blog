@@ -1,6 +1,7 @@
 # Construindo um gerador de vídeos curtos com tecnologia de IA
 
-![](/assets/ai-short-video-generator-demo.mp4)
+<video src="/assets/ai-short-video-generator-demo.mp4" width="320" height="240" controls></video>
+
 ![](/assets/ai-short-video-generator-demo.gif)
 
 ### **Introdução**
