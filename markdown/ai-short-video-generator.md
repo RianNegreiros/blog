@@ -1,5 +1,8 @@
 # Construindo um gerador de vídeos curtos com tecnologia de IA
 
+![](/assets/ai-short-video-generator-demo.mp4)
+![](/assets/ai-short-video-generator-demo.gif)
+
 ### **Introdução**
 
 O AI Shorts Video Generator é uma ferramenta projetada para automatizar a criação de vídeos curtos, aproveitando as tecnologias de IA. Ela simplifica o processo de transformação de um prompt de texto em um vídeo completo, incluindo roteiro, narração e montagem de vídeo.
